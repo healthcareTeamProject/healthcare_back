@@ -1,4 +1,4 @@
-package main.java.com.example.healthcare_back.dto.request.customer;
+package com.example.healthcare_back.dto.request.customer;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

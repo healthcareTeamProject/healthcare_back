@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`customer` (
   `password` VARCHAR(255) CHARACTER SET 'armscii8' NOT NULL COMMENT '비밀번호',
   `tel_number` VARCHAR(11) NOT NULL COMMENT '전화번호',
   `join_path` VARCHAR(5) NOT NULL COMMENT '가입경로',
-  `sns_id` VARCHAR(255) NULL COMMENT 'snsID(kakao, naver)',
+  `sns_id` VARCHAR(255) NULL COMMENT 'snsID',
   `height` FLOAT NOT NULL COMMENT '키(cm)',
   `profile_image` TEXT NULL COMMENT '프로필이미지',
   `personal_goals` TEXT NULL COMMENT '개인 목표',
@@ -54,9 +54,9 @@ COMMENT = '사용자정보';
 
 
 -- -----------------------------------------------------
--- Table `health_care`.`user_board`
+-- Table `health_care`.`boards`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `health_care`.`user_board` (
+CREATE TABLE IF NOT EXISTS `health_care`.`boards` (
   `board_number` INT NOT NULL AUTO_INCREMENT COMMENT '게시물 번호',
   `board_title` VARCHAR(80) NOT NULL COMMENT '게시물 제목',
   `user_id` VARCHAR(20) NOT NULL COMMENT '게시물을 작성한 사용자 아이디',
@@ -66,11 +66,10 @@ CREATE TABLE IF NOT EXISTS `health_care`.`user_board` (
   `youtube_video_link` VARCHAR(255) NULL COMMENT '유튜브비디오링크',
   `board_upload_date` DATE NOT NULL COMMENT '사용자 작성 게시물 생성날짜',
   `board_view_count` INT NOT NULL DEFAULT 0 COMMENT '조회수',
-  `board_like_count` INT NOT NULL DEFAULT 0 COMMENT '게시물 추천',
+  `board_like_count` INT NOT NULL DEFAULT 0 COMMENT '게시물 추천 수',
   PRIMARY KEY (`board_number`),
   INDEX `post_category_INDEX` (`board_category` ASC) VISIBLE,
   UNIQUE INDEX `board_number_UNIQUE` (`board_number` ASC) VISIBLE,
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE,
   CONSTRAINT `customer_user_board`
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`)
@@ -81,19 +80,6 @@ COMMENT = '사용자 게시물';
 
 
 -- -----------------------------------------------------
--- Table `health_care`.`board_contents_file`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `health_care`.`board_contents_file` (
-  `board_file_number` INT NOT NULL AUTO_INCREMENT COMMENT '게시물 파일 번호',
-  `board_number` INT NOT NULL COMMENT '게시물 번호',
-  `board_file_contents` TEXT NOT NULL COMMENT '게시물 자료 ',
-  PRIMARY KEY (`board_file_number`),
-  UNIQUE INDEX `post_file_number_UNIQUE` (`board_file_number` ASC) VISIBLE)
-ENGINE = MEMORY
-COMMENT = '사용자 게시물 첨부 이미지 파일';
-
-
--- -----------------------------------------------------
 -- Table `health_care`.`comments`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_care`.`comments` (
@@ -101,14 +87,14 @@ CREATE TABLE IF NOT EXISTS `health_care`.`comments` (
   `user_id` VARCHAR(20) NOT NULL COMMENT '댓글을 작성한 사용자 아이디',
   `board_number` INT NOT NULL COMMENT '댓글을 작성한 게시물 번호',
   `comments_contents` TEXT NOT NULL COMMENT '댓글 내용',
-  `comments_date` DATE NOT NULL COMMENT '댓글작성날짜',
-  `comments_like_count` INT NOT NULL DEFAULT 0 COMMENT '댓글 추천',
+  `comments_date` DATE NOT NULL COMMENT '댓글  작성날짜',
+  `comments_like_count` INT NOT NULL DEFAULT 0 COMMENT '댓글 추천 수',
   UNIQUE INDEX `comments_number_UNIQUE` (`comments_number` ASC) VISIBLE,
   PRIMARY KEY (`comments_number`),
   INDEX `user_post_comments_idx` (`board_number` ASC) VISIBLE,
   CONSTRAINT `user_board_comments`
     FOREIGN KEY (`board_number`)
-    REFERENCES `health_care`.`user_board` (`board_number`)
+    REFERENCES `health_care`.`boards` (`board_number`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `customer_comments`
@@ -177,7 +163,6 @@ CREATE TABLE IF NOT EXISTS `health_care`.`health_machine_measurement` (
   `health_machine_measurement_date` DATE NOT NULL COMMENT '사용자 3대 측정 정보 등록 날짜',
   PRIMARY KEY (`health_machine_measurement_number`),
   UNIQUE INDEX `user_id_UNIQUE` (`health_machine_measurement_number` ASC) VISIBLE,
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE,
   CONSTRAINT `customer_health_machine_measurement`
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`)
@@ -198,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`board_health_map` (
   UNIQUE INDEX `board_number_UNIQUE` (`board_number` ASC) VISIBLE,
   CONSTRAINT `user_board_board_health_map`
     FOREIGN KEY (`board_number`)
-    REFERENCES `health_care`.`user_board` (`board_number`)
+    REFERENCES `health_care`.`boards` (`board_number`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -238,7 +223,6 @@ CREATE TABLE IF NOT EXISTS `health_care`.`user_muscle_fat` (
   `user_muscle_fat_date` DATE NOT NULL COMMENT '사용자 신체 정보 등록 날짜',
   PRIMARY KEY (`user_muscle_fat_number`),
   UNIQUE INDEX `user_muscle_fat_number_UNIQUE` (`user_muscle_fat_number` ASC) VISIBLE,
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE,
   CONSTRAINT `customer_user_muscle_fat`
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`)
@@ -246,6 +230,24 @@ CREATE TABLE IF NOT EXISTS `health_care`.`user_muscle_fat` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 COMMENT = '사용자 신체 정보';
+
+
+-- -----------------------------------------------------
+-- Table `health_care`.`board_file_contents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `health_care`.`board_file_contents` (
+  `board_file_number` INT NOT NULL AUTO_INCREMENT,
+  `board_number` INT NOT NULL,
+  `board_file_contents` TEXT NOT NULL,
+  PRIMARY KEY (`board_file_number`),
+  UNIQUE INDEX `board_file_number_UNIQUE` (`board_file_number` ASC) VISIBLE,
+  INDEX `boards_board_file_contents_idx` (`board_number` ASC) VISIBLE,
+  CONSTRAINT `boards_board_file_contents`
+    FOREIGN KEY (`board_number`)
+    REFERENCES `health_care`.`boards` (`board_number`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -1,4 +1,4 @@
-package main.java.com.example.healthcare_back.common.object;
+package com.example.healthcare_back.common.object;
 
 import com.example.healthcare_back.entity.CustomerEntity;
 

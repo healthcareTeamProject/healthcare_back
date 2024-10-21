@@ -1287,7 +1287,7 @@ curl -X GET "http://localhost:4000/api/v1/board" \
 | board_title | String | 게시물 제목 | O |
 | nickname | String | 게시물 작성자 닉네임 | O |
 | board_upload_date | String | 게시물 작성날짜 | O |
-| board_view_count | String | 게시물 조회수 | O |
+| board_view_count | Integer | 게시물 조회수 | O |
 
 ###### Example
 
