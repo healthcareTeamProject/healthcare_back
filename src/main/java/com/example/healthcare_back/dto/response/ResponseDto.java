@@ -3,8 +3,6 @@ package com.example.healthcare_back.dto.response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
