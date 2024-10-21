@@ -1,15 +1,13 @@
 package com.example.healthcare_back.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.healthcare_back.dto.request.auth.IdCheckRequestDto;
-import com.example.healthcare_back.dto.request.auth.NickNameCheckRequestDto;
+import com.example.healthcare_back.dto.request.auth.NicknameCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignInRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthCheckRequestDto;
@@ -38,7 +36,7 @@ public class AuthController {
 
     @PostMapping("/nickname-check")
     public ResponseEntity<ResponseDto> nicknameCheck(
-        @RequestBody @Valid NickNameCheckRequestDto requestBody
+        @RequestBody @Valid NicknameCheckRequestDto requestBody
     ) {
         ResponseEntity<ResponseDto> response = authService.nicknameCheck(requestBody);
         return response;
@@ -76,11 +74,5 @@ public class AuthController {
         return response;
     }
 
-    @GetMapping(value="/sns-sign-in/{registerId}")
-    public ResponseEntity<? super SignInResponseDto> getSnsId(
-        @PathVariable("registerId") String registerId
-    ) {
-        ResponseEntity<? super SignInResponseDto> response = authService.getSnsId(registerId);
-        return response;
-    }
+    
 }

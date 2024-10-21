@@ -1,6 +1,10 @@
-package main.java.com.example.healthcare_back.service.implement;
+package com.example.healthcare_back.service.implement;
 
-import main.java.com.example.healthcare_back.service.BoardService;
+import org.springframework.stereotype.Service;
+
+import com.example.healthcare_back.service.BoardService;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
