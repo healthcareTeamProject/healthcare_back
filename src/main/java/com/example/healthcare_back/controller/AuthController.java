@@ -1,8 +1,6 @@
 package com.example.healthcare_back.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,11 +74,5 @@ public class AuthController {
         return response;
     }
 
-    @GetMapping(value="/sns-sign-in/{registerId}")
-    public ResponseEntity<? super SignInResponseDto> getSnsId(
-        @PathVariable("registerId") String registerId
-    ) {
-        ResponseEntity<? super SignInResponseDto> response = authService.getSnsId(registerId);
-        return response;
-    }
+    
 }
