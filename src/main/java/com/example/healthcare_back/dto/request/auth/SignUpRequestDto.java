@@ -35,11 +35,9 @@ public class SignUpRequestDto {
     private String joinPath;
     private String snsId;
     @NotBlank
-    @Pattern(regexp="^[0-9]{3}$")
     private Float weight;
     @NotBlank
-    @Pattern(regexp="^[0-9]{3}$")
-    private String height;
+    private Float height;
     private Float skeletalMuscleMass;
     private Float bodyFatMass;
     private Float deadlift;
