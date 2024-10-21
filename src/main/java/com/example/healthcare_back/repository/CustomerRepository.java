@@ -10,6 +10,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, String
     
     boolean existsByUserId(String userId);
     boolean existsByTelNumber(String telNumber);
+    boolean existsByNickname(String nickname);
     
     CustomerEntity findByUserId(String userId);
     CustomerEntity findBySnsIdAndJoinPath(String sns, String joinPath);

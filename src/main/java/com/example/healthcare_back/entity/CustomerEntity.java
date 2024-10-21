@@ -1,6 +1,5 @@
 package com.example.healthcare_back.entity;
 
-import com.example.healthcare_back.dto.request.auth.SignInRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 
 import jakarta.persistence.Entity;
@@ -27,8 +26,13 @@ public class CustomerEntity {
     private String snsId;
     private String profileImage;
     private String personalGoal;
-    private String height;
-    private String registerId;
+    private Float weight;
+    private Float height;
+    private Float skeletalMuscleMass;
+    private Float bodyFatMass;
+    private Float deadlift;
+    private Float benchPress;
+    private Float squat;
 
 
     public CustomerEntity(SignUpRequestDto dto) {
@@ -42,12 +46,13 @@ public class CustomerEntity {
         this.profileImage = dto.getProfileImage();
         this.personalGoal = dto.getPersonalGoal();
         this.height = dto.getHeight();
-    }
+        this.weight = dto.getWeight();
+        this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
+        this.bodyFatMass = dto.getBodyFatMass();
+        this.deadlift = dto.getDeadlift();
+        this.benchPress = dto.getBenchPress();
+        this.squat = dto.getSquat();
 
-    public CustomerEntity(SignInRequestDto dto) {
-        this.userId = dto.getUserId();
-        this.password = dto.getPassword();
-        this.registerId = dto.getRegisterId();
     }
 
 

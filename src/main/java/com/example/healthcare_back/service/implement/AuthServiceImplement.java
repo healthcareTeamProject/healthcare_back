@@ -17,6 +17,7 @@ import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
 import com.example.healthcare_back.entity.TelAuthNumberEntity;
 import com.example.healthcare_back.provider.JwtProvider;
 import com.example.healthcare_back.provider.SmsProvider;
+import com.example.healthcare_back.repository.CustomerRepository;
 import com.example.healthcare_back.repository.TelAuthNumberRepository;
 import com.example.healthcare_back.service.AuthService;
 
@@ -29,6 +30,7 @@ public class AuthServiceImplement implements AuthService {
     private final SmsProvider smsProvider;
     private final JwtProvider jwtProvider;
 
+    private final CustomerRepository customerRepository;
     private final TelAuthNumberRepository telAuthNumberRepository;
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -40,7 +42,7 @@ public class AuthServiceImplement implements AuthService {
 
         try {
 
-            boolean isExistedTelNumber = telAuthNumberRepository.existsByTelNumber(telNumber);
+            boolean isExistedTelNumber = customerRepository.existsByTelNumber(telNumber);
             if (isExistedTelNumber) return ResponseDto.duplicatedUserTelNumber();
 
         } catch(Exception exception) {
@@ -123,7 +125,7 @@ public class AuthServiceImplement implements AuthService {
         try {
 
             accessToken = jwtProvider.create(userId);
-            if (accessToken == null) return ResponseDto.TokenCreationFail();
+            if (accessToken == null) return ResponseDto.tokenCreateFail();
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -136,17 +138,39 @@ public class AuthServiceImplement implements AuthService {
 
     @Override
     public ResponseEntity<ResponseDto> idCheck(IdCheckRequestDto dto) {
-        return null;
+        
+        String userId = dto.getUserId();
+
+        try {
+
+            boolean isExistedId = customerRepository.existsByUserId(userId);
+            if (isExistedId) return ResponseDto.duplicatedUserId();
+
+        } catch(Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success();
+
     }
 
     @Override
     public ResponseEntity<ResponseDto> nicknameCheck(NickNameCheckRequestDto dto) {
-        return null;
-    }
+        String nickName = dto.getNickName();
 
-    @Override
-    public ResponseEntity<? super SignInResponseDto> getSnsId(String registerId) {
-        return null;
+        try {
+
+            boolean isExistedId = customerRepository.existsByNickname(nickName);
+            if (isExistedId) return ResponseDto.duplicatedUserNickname();
+
+        } catch(Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success();
+
     }
 
 }
