@@ -52,7 +52,7 @@ public class FileServiceImplement implements FileService {
     @Override
     public Resource getFile(String fileName) {
         
-        Resource resource = null;
+        Resource resource;
 
         // description: 파일 저장 경로에 있는 파일명에 해당하는 파일 불러오기 //
         try {

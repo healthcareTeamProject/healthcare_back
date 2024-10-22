@@ -26,6 +26,14 @@ public class AuthController {
 
     private final AuthService authService;
 
+    @PostMapping("/sign-in")
+    public ResponseEntity<? super SignInResponseDto> signIn(
+        @RequestBody @Valid SignInRequestDto requestBody
+    ) {
+        ResponseEntity<? super SignInResponseDto> response = authService.signIn(requestBody);
+        return response;
+    }
+
     @PostMapping("/id-check")
     public ResponseEntity<ResponseDto> idCheck(
         @RequestBody @Valid IdCheckRequestDto requestBody
@@ -65,14 +73,4 @@ public class AuthController {
         ResponseEntity<ResponseDto> response = authService.signUp(requestBody);
         return response;
     }
-
-    @PostMapping("/sign-in")
-    public ResponseEntity<? super SignInResponseDto> signIn(
-        @RequestBody @Valid SignInRequestDto requestBody
-    ) {
-        ResponseEntity<? super SignInResponseDto> response = authService.signIn(requestBody);
-        return response;
-    }
-
-    
 }

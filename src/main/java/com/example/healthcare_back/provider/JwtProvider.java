@@ -1,11 +1,10 @@
 package com.example.healthcare_back.provider;
 
-import java.util.Date;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-
-import java.security.Key;
-import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -31,7 +30,7 @@ public class JwtProvider {
         // 만료시간 = 현재시간 + 10시간
         Date expiredDate = Date.from(Instant.now().plus(10, ChronoUnit.HOURS));
 
-        String jwt = null;
+        String jwt;
 
         try {
 
@@ -58,7 +57,7 @@ public class JwtProvider {
     // JWT 검증 메서드
     public String validate(String jwt) {
 
-        String userId = null;
+        String userId;
 
         try {
             

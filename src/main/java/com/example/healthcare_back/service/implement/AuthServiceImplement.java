@@ -120,7 +120,7 @@ public class AuthServiceImplement implements AuthService {
         String userId = dto.getUserId();
         String password = dto.getPassword();
 
-        String accessToken = null;
+        String accessToken;
 
         try {
 
@@ -152,11 +152,10 @@ public class AuthServiceImplement implements AuthService {
         }
 
         return ResponseDto.success();
-
     }
 
     @Override
-    public ResponseEntity<ResponseDto> nicknameCheck(NicknameCheckRequestDto dto) {
+    public ResponseEntity<ResponseDto> nicknameCheck(NickNameCheckRequestDto dto) {
         String nickName = dto.getNickName();
 
         try {
@@ -170,7 +169,6 @@ public class AuthServiceImplement implements AuthService {
         }
 
         return ResponseDto.success();
-
     }
 
 }

@@ -937,16 +937,16 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234" \
 
 ###### Response Body
 
-| name                   |  type   |        description         | required |
-| ---------------------- | :-----: | :------------------------: | :------: |
-| code                   | String  |         결과 코드          |    O     |
-| message                | String  |   결과 코드에 대한 설명    |    O     |
-| user_muscle_fat_number | Integer |   사용자 신체 정보 번호    |    O     |
-| userId                 | String  |       사용자 아이디        |    O     |
-| weight                 |  Float  |           몸무게           |    O     |
-| skeletal_muscle_mass   |  Float  |          골격근량          |    X     |
-| body_fat_mass          |  Float  |          체지방량          |    X     |
-| user_muscle_fat_date   |  Date   | 사용자 신체 정보 등록 날짜 |    O     |
+| name                |  type   |        description         | required |
+| ------------------- | :-----: | :------------------------: | :------: |
+| code                | String  |         결과 코드          |    O     |
+| message             | String  |   결과 코드에 대한 설명    |    O     |
+| userMuscleFatNumber | Integer |   사용자 신체 정보 번호    |    O     |
+| userId              | String  |       사용자 아이디        |    O     |
+| weight              |  Float  |           몸무게           |    O     |
+| skeletalMuscleMass  |  Float  |          골격근량          |    X     |
+| bodyFatMass         |  Float  |          체지방량          |    X     |
+| userMuscleFatDate   | String  | 사용자 신체 정보 등록 날짜 |    O     |
 
 ###### Example
 
@@ -959,10 +959,12 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
+  "userMuscleFatNumber": 1,
   "userId": "qwer1234",
   "weigh" : 80 ,
   "skeletalMuscleMass" : 34.5,
-  "bodyFatMass" : 10.4
+  "bodyFatMass" : 10.4,
+  "userMuscleFatDate": "2024-11-11"
 }
 ```
 
@@ -1037,16 +1039,16 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 
 ###### Response Body
 
-| name                              |  type   |          description           | required |
-| --------------------------------- | :-----: | :----------------------------: | :------: |
-| code                              | String  |           결과 코드            |    O     |
-| message                           | String  |     결과 코드에 대한 설명      |    O     |
-| health_machine_measurement_number | Integer |   사용자 3대 측정 정보 번호    |    O     |
-| userId                            | String  |         사용자 아이디          |    O     |
-| deadlift                          |  Float  |         데드리프트(kg)         |    X     |
-| bench_press                       |  Float  |         벤치프레스(kg)         |    X     |
-| squat                             |  Float  |             스쿼트             |    X     |
-| health_machine_measurement_date   |  Date   | 사용자 3대 측정 정보 등록 날짜 |    O     |
+| name                  |  type   |        description        | required |
+| --------------------- | :-----: | :-----------------------: | :------: |
+| code                  | String  |         결과 코드         |    O     |
+| message               | String  |   결과 코드에 대한 설명   |    O     |
+| threeMajorLiftsNumber | Integer | 사용자 3대 측정 정보 번호 |    O     |
+| userId                | String  |       사용자 아이디       |    O     |
+| deadlift              |  Float  |      데드리프트(kg)       |    X     |
+| benchPress            |  Float  |      벤치프레스(kg)       |    X     |
+| squat                 |  Float  |          스쿼트           |    X     |
+| threeMajorLiftsDate   | String  | 사용자 3대 측정 등록 날짜 |    O     |
 
 ###### Example
 
@@ -1059,10 +1061,12 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
+  "threeMajorLiftsNumber": 1,
   "userId": "qwer1234",
-  "weigh" : 80 ,
-  "skeletalMuscleMass" : 34.5,
-  "bodyFatMass" : 10.4
+  "deadlift" : 120,
+  "benchPress" : 100,
+  "squat" : 110,
+  "threeMajorLiftsDate" : "2024-11-11"
 }
 ```
 
@@ -1283,11 +1287,11 @@ curl -X GET "http://localhost:4000/api/v1/board" \
 **Board**  
 | name | type | description | required |
 |---|:---:|:---:|:---:|
-| board_number | String | 게시물 번호 | O |
-| board_title | String | 게시물 제목 | O |
+| boardNumber | Integer | 게시물 번호 | O |
+| boardTitle | String | 게시물 제목 | O |
 | nickname | String | 게시물 작성자 닉네임 | O |
-| board_upload_date | String | 게시물 작성날짜 | O |
-| board_view_count | Integer | 게시물 조회수 | O |
+| boardUploadDate | String | 게시물 작성날짜 | O |
+| boardViewCount | Integer | 게시물 조회수 | O |
 
 ###### Example
 
@@ -1481,19 +1485,20 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 
 ###### Response Body
 
-| name             |   type    |      description      | required |
-| ---------------- | :-------: | :-------------------: | :------: |
-| code             |  String   |       결과 코드       |    O     |
-| message          |  String   | 결과 코드에 대한 설명 |    O     |
-| bordNumber       |  Integer  |      게시물 번호      |    O     |
-| boardTitle       |  String   |      게시물 제목      |    O     |
-| nickName         |  String   |     게시물 닉네임     |    O     |
-| boardUploadDate  |   Date    | 작성 게시물 생성 날짜 |    O     |
-| boardContents    |  String   |      게시물 내용      |    O     |
-| youtubeVideoLink |  String   |  유튜브 비디오 링크   |    X     |
-| boardViewCount   |  Integer  |        조회수         |    O     |
-| boardLikeCount   |  Integer  |    게시물 추천 수     |    O     |
-| comments         | Cooment[] |      댓글 리스트      |    O     |
+| name              |   type    |      description      | required |
+| ----------------- | :-------: | :-------------------: | :------: |
+| code              |  String   |       결과 코드       |    O     |
+| message           |  String   | 결과 코드에 대한 설명 |    O     |
+| bordNumber        |  Integer  |      게시물 번호      |    O     |
+| boardTitle        |  String   |      게시물 제목      |    O     |
+| nickName          |  String   |     게시물 닉네임     |    O     |
+| boardUploadDate   |  String   | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |  String   |      게시물 내용      |    O     |
+| youtubeVideoLink  |  String   |  유튜브 비디오 링크   |    X     |
+| boardFileContents |  String   |      게시물 자료      |    X     |
+| boardViewCount    |  Integer  |        조회수         |    O     |
+| boardLikeCount    |  Integer  |    게시물 추천 수     |    O     |
+| comments          | Cooment[] |      댓글 리스트      |    O     |
 
 **comment**
 | name | type | description | required |
@@ -1502,7 +1507,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 | userId | String | 댓글 사용자 아이디 | O |
 | commentsContents | String | 댓글 내용 | O |
 | commentsLikeCount | Integer | 댓글 추천수 |O |
-| commentsDate | Date | 댓글 작성 날짜 | O |
+| commentsDate | String | 댓글 작성 날짜 | O |
 
 ###### Example
 
@@ -1520,9 +1525,19 @@ Content-Type: application/json;charset=UTF-8
   "boardUploadDate": 2024-10-17 14:36,
   "boardContents": "오늘 하체랑 엉덩이가 터질것같다"
   "youtubeVideoLink": null,
+  "boardFileContents": null,
   "boardViewCount": 10,
   "boardLikeCount": 10,
-  "commentsNumber": 2
+  "comments": [
+    {
+      "commentsNumber": 1,
+      "userId": "zxcv1234",
+      "commentsContents": "하체운동 어떻게 하시나요?",
+      "commentsLikeCount": 1,
+      "commentsDate": "2024-10-18 13:03"
+    },
+    ...
+  ]
 }
 
 ```
@@ -2070,8 +2085,8 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2177,8 +2192,8 @@ Content-Type: application/json;charset=UTF-8
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| mealScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| mealScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| mealScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| mealScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2301,8 +2316,8 @@ curl -X GET "http://localhost:4000/api/v1/health-schedule/1" \
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2396,8 +2411,8 @@ curl -X GET "http://localhost:4000/api/v1/meal-schedule/1" \
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2474,8 +2489,8 @@ Content-Type: application/json;charset=UTF-8
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2584,8 +2599,8 @@ Content-Type: application/json;charset=UTF-8
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2692,8 +2707,8 @@ Content-Type: application/json;charset=UTF-8
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2792,8 +2807,8 @@ Content-Type: application/json;charset=UTF-8
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 

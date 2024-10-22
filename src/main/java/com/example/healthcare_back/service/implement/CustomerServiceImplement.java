@@ -22,7 +22,7 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId) {
         
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
 
@@ -60,7 +60,7 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId) {
        
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
             
