@@ -16,10 +16,7 @@ public class GetCustomerResponseDto extends ResponseDto {
     private String userId;
     private String name;
     private String nickname;
-    private String password;
     private String telNumber;
-    private String joinPath;
-    private String snsId;
     private String profileImage;
     private String personalGoal;
     private Float weight;
@@ -29,6 +26,10 @@ public class GetCustomerResponseDto extends ResponseDto {
     private Float deadlift;
     private Float benchPress;
     private Float squat;
+    private Integer userMuscleFatNumber;
+    private String userMuscleFatDate;
+    private Integer threeMajorLiftsNumber;
+    private String threeMajorLiftsDate;
     
 
 

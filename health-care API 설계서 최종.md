@@ -937,16 +937,16 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234" \
 
 ###### Response Body
 
-| name                   |  type   |        description         | required |
-| ---------------------- | :-----: | :------------------------: | :------: |
-| code                   | String  |         결과 코드          |    O     |
-| message                | String  |   결과 코드에 대한 설명    |    O     |
-| user_muscle_fat_number | Integer |   사용자 신체 정보 번호    |    O     |
-| userId                 | String  |       사용자 아이디        |    O     |
-| weight                 |  Float  |           몸무게           |    O     |
-| skeletal_muscle_mass   |  Float  |          골격근량          |    X     |
-| body_fat_mass          |  Float  |          체지방량          |    X     |
-| user_muscle_fat_date   |  Date   | 사용자 신체 정보 등록 날짜 |    O     |
+| name                |  type   |        description         | required |
+| ------------------- | :-----: | :------------------------: | :------: |
+| code                | String  |         결과 코드          |    O     |
+| message             | String  |   결과 코드에 대한 설명    |    O     |
+| userMuscleFatNumber | Integer |   사용자 신체 정보 번호    |    O     |
+| userId              | String  |       사용자 아이디        |    O     |
+| weight              |  Float  |           몸무게           |    O     |
+| skeletalMuscleMass  |  Float  |          골격근량          |    X     |
+| bodyFatMass         |  Float  |          체지방량          |    X     |
+| userMuscleFatDate   | String  | 사용자 신체 정보 등록 날짜 |    O     |
 
 ###### Example
 
@@ -959,10 +959,12 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
+  "userMuscleFatNumber": 1,
   "userId": "qwer1234",
   "weigh" : 80 ,
   "skeletalMuscleMass" : 34.5,
-  "bodyFatMass" : 10.4
+  "bodyFatMass" : 10.4,
+  "userMuscleFatDate": "2024-11-11"
 }
 ```
 
@@ -1037,16 +1039,16 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 
 ###### Response Body
 
-| name                              |  type   |          description           | required |
-| --------------------------------- | :-----: | :----------------------------: | :------: |
-| code                              | String  |           결과 코드            |    O     |
-| message                           | String  |     결과 코드에 대한 설명      |    O     |
-| health_machine_measurement_number | Integer |   사용자 3대 측정 정보 번호    |    O     |
-| userId                            | String  |         사용자 아이디          |    O     |
-| deadlift                          |  Float  |         데드리프트(kg)         |    X     |
-| bench_press                       |  Float  |         벤치프레스(kg)         |    X     |
-| squat                             |  Float  |             스쿼트             |    X     |
-| health_machine_measurement_date   |  Date   | 사용자 3대 측정 정보 등록 날짜 |    O     |
+| name                  |  type   |        description        | required |
+| --------------------- | :-----: | :-----------------------: | :------: |
+| code                  | String  |         결과 코드         |    O     |
+| message               | String  |   결과 코드에 대한 설명   |    O     |
+| threeMajorLiftsNumber | Integer | 사용자 3대 측정 정보 번호 |    O     |
+| userId                | String  |       사용자 아이디       |    O     |
+| deadlift              |  Float  |      데드리프트(kg)       |    X     |
+| benchPress            |  Float  |      벤치프레스(kg)       |    X     |
+| squat                 |  Float  |          스쿼트           |    X     |
+| threeMajorLiftsDate   | String  | 사용자 3대 측정 등록 날짜 |    O     |
 
 ###### Example
 
@@ -1059,10 +1061,12 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
+  "threeMajorLiftsNumber": 1,
   "userId": "qwer1234",
-  "weigh" : 80 ,
-  "skeletalMuscleMass" : 34.5,
-  "bodyFatMass" : 10.4
+  "deadlift" : 120,
+  "benchPress" : 100,
+  "squat" : 110,
+  "threeMajorLiftsDate" : "2024-11-11"
 }
 ```
 
@@ -1111,7 +1115,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 사용자 프로필 이미지, 이름, 닉네임, 키, 개인 목표, 몸무게, 골격근량, 체지방량, 벤치프레스, 스쿼트, 데드리프트를 입력하여 요청하고 마이페이지 정보 수정이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **PATCH**
-- end point : **/**
+- end point : **/{userId}**
 
 ##### Request
 
@@ -1140,7 +1144,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -v -X PATCH "http://localhost:4000/api/v1" \
+curl -v -X PATCH "http://localhost:4000/api/v1/{userId}" \
  -d "profileImage=null"\
  -d "name=홍길동"\
  -d "nickname=뽀삐puppy12"\
@@ -1260,7 +1264,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/board" \
+curl -X GET "http://localhost:4000/api/v1/board/board-list" \
 
 ```
 
@@ -1274,20 +1278,20 @@ curl -X GET "http://localhost:4000/api/v1/board" \
 
 ###### Response Body
 
-| name    |  type   |      description      | required |
-| ------- | :-----: | :-------------------: | :------: |
-| code    | String  |       결과 코드       |    O     |
-| message | String  | 결과 코드에 대한 설명 |    O     |
-| boards  | Board[] |     게시글 리스트     |    O     |
+| name    |    type     |      description      | required |
+| ------- | :---------: | :-------------------: | :------: |
+| code    |   String    |       결과 코드       |    O     |
+| message |   String    | 결과 코드에 대한 설명 |    O     |
+| boards  | BoardList[] |     게시글 리스트     |    O     |
 
 **Board**  
 | name | type | description | required |
 |---|:---:|:---:|:---:|
-| board_number | String | 게시물 번호 | O |
-| board_title | String | 게시물 제목 | O |
+| boardNumber | Integer | 게시물 번호 | O |
+| boardTitle | String | 게시물 제목 | O |
 | nickname | String | 게시물 작성자 닉네임 | O |
-| board_upload_date | String | 게시물 작성날짜 | O |
-| board_view_count | Integer | 게시물 조회수 | O |
+| boardUploadDate | String | 게시물 작성날짜 | O |
+| boardViewCount | Integer | 게시물 조회수 | O |
 
 ###### Example
 
@@ -1304,7 +1308,7 @@ Content-Type: application/json;charset=UTF-8
     {
       "boardNumber": 1,
       "boardTitle": "오늘에 추천 식단은~~",
-      "nickName": "뽀보이strong1",
+      "nickname": "뽀보이strong1",
       "board_upload_date": 2024-10-17 14:36,
       "board_view_count" : 20
     },
@@ -1363,7 +1367,7 @@ Content-Type: application/json;charset=UTF-8
 | boardTag          | String |    게시물 태그    |    O     |
 | boardContents     | String |    게시물 내용    |    O     |
 | youtubeVideoLink  | String | 유튜브비디오 링크 |    X     |
-| boardFileContents | String |    게시물 자료    |    X     |
+| boardFileContents | String | 게시물 첨부 자료  |    X     |
 | mapLat            | Float  |       위도        |    X     |
 | mapLng            | Float  |       경도        |    X     |
 
@@ -1481,34 +1485,36 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 
 ###### Response Body
 
-| name             |   type    |      description      | required |
-| ---------------- | :-------: | :-------------------: | :------: |
-| code             |  String   |       결과 코드       |    O     |
-| message          |  String   | 결과 코드에 대한 설명 |    O     |
-| bordNumber       |  Integer  |      게시물 번호      |    O     |
-| boardTitle       |  String   |      게시물 제목      |    O     |
-| nickName         |  String   |     게시물 닉네임     |    O     |
-| boardUploadDate  |   Date    | 작성 게시물 생성 날짜 |    O     |
-| boardContents    |  String   |      게시물 내용      |    O     |
-| youtubeVideoLink |  String   |  유튜브 비디오 링크   |    X     |
-| boardViewCount   |  Integer  |        조회수         |    O     |
-| boardLikeCount   |  Integer  |    게시물 추천 수     |    O     |
-| comments         | Cooment[] |      댓글 리스트      |    O     |
+| name              |    type    |      description      | required |
+| ----------------- | :--------: | :-------------------: | :------: |
+| code              |   String   |       결과 코드       |    O     |
+| message           |   String   | 결과 코드에 대한 설명 |    O     |
+| bordNumber        |  Integer   |      게시물 번호      |    O     |
+| boardTitle        |   String   |      게시물 제목      |    O     |
+| nickname          |   String   |     게시물 닉네임     |    O     |
+| boardUploadDate   |   String   | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |   String   |      게시물 내용      |    O     |
+| youtubeVideoLink  |   String   |  유튜브 비디오 링크   |    X     |
+| boardFileContents |   String   |   게시물 첨부 자료    |    X     |
+| boardViewCount    |  Integer   |        조회수         |    O     |
+| boardLikeCount    |  Integer   |    게시물 추천 수     |    O     |
+| comments          | Comments[] |      댓글 리스트      |    O     |
+| commentsCount     |  Integer   |       댓글 개수       |    O     |
 
-**comment**
+**comments**
 | name | type | description | required |
 |---|:---:|:---:|:---:|
 | commentsNumber | Integer | 댓글 번호 | O |
 | userId | String | 댓글 사용자 아이디 | O |
 | commentsContents | String | 댓글 내용 | O |
 | commentsLikeCount | Integer | 댓글 추천수 |O |
-| commentsDate | Date | 댓글 작성 날짜 | O |
+| commentsDate | String | 댓글 작성 날짜 | O |
 
 ###### Example
 
 **응답 성공**
 
-````bash
+```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
@@ -1516,18 +1522,28 @@ Content-Type: application/json;charset=UTF-8
   "code": "SU",
   "message": "Success.",
   "bordNumber": 1,
-  "nickName": "뽀보이strong1",
+  "nickname": "뽀보이strong1",
   "boardUploadDate": 2024-10-17 14:36,
   "boardContents": "오늘 하체랑 엉덩이가 터질것같다"
   "youtubeVideoLink": null,
+  "boardFileContents": null,
   "boardViewCount": 10,
   "boardLikeCount": 10,
-  "commentsNumber": 2
+  "comments": [
+    {
+      "commentsNumber": 1,
+      "userId": "zxcv1234",
+      "commentsContents": "하체운동 어떻게 하시나요?",
+      "commentsLikeCount": 1,
+      "commentsDate": "2024-10-18 13:03"
+    }
+    ...
+  ]
 }
-
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
+
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1536,9 +1552,9 @@ Content-Type: application/json;charset=UTF-8
   "code": "VF",
   "message": "Validation failed."
 }
-````
+```
 
-**응답 : 실패 (인증 실패)**
+**응답 실패 (인증 실패)**
 
 ```bash
 HTTP/1.1 401 Unauthorized
@@ -1591,14 +1607,14 @@ URL에 게시물 번호를 포함하고 게시물 번호, 게시물 제목, 게�
 | boardTag          | String |    게시물 태그    |    O     |
 | boardContents     | String |    게시물 내용    |    O     |
 | youtubeVideoLink  | String | 유튜브비디오 링크 |    X     |
-| boardFileContents | String |    게시물 자료    |    X     |
+| boardFileContents | String | 게시물 첨부 자료  |    X     |
 | mapLat            | Float  |       위도        |    X     |
 | mapLng            | Float  |       경도        |    X     |
 
 ###### Example
 
 ```bash
-curl -v -X PATCH "http://localhost:4000/api/v1/boardNumber/1" \
+curl -v -X PATCH "http://localhost:4000/api/v1/board/1" \
  -h "Authorization=Bearer XXXX" \
  -d "boardTitle=오늘은 다이어트 94일차" \
  -d "boardCategory=식단일지", \
@@ -1763,6 +1779,103 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+#### - 댓글 리스트 보기
+
+##### 설명
+
+모든 클라이언트는 댓글 번호, 댓글 작성자 닉네임, 댓글 내용, 댓글 작성날짜, 댓글 추천 수가 조회가 되면 성공적으로 응답을 받습니다. 네트워크 에러, 서버에러, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **GET**
+- end point : **/comments-list**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
+
+###### Example
+
+```bash
+curl -X GET "http://localhost:4000/api/v1/board/{boardNumber}/comments-list" \
+
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name     |      type      |      description      | required |
+| -------- | :------------: | :-------------------: | :------: |
+| code     |     String     |       결과 코드       |    O     |
+| message  |     String     | 결과 코드에 대한 설명 |    O     |
+| comments | CommentsList[] |      댓글 리스트      |    O     |
+
+**CommentsList**  
+| name | type | description | required |
+|---|:---:|:---:|:---:|
+| commentsNumber | Integer | 댓글 번호 | O |
+| commentsContents | String | 댓글 내용 | O |
+| nickname | String | 댓글 작성자 닉네임 | O |
+| commentsDate | String | 댓글 작성날짜 | O |
+| commentsLikeCount | Integer | 댓글 추천 개수 | O |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+  "tools": [
+    {
+      "commentsNumber": 1,
+      "commentsContents": "식단 추천해주세요!",
+      "nickname": "뽀보이strong1",
+      "commentsDate": 2024-10-17 14:36,
+      "commentsLikeCount" : 20
+    },
+    ...
+  ]
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
 #### - 댓글 등록
 
 ##### 설명
@@ -1782,16 +1895,16 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name          |  type  | description | required |
-| ------------- | :----: | :---------: | :------: |
-| boardContents | String |  댓글 내용  |    O     |
+| name             |  type  | description | required |
+| ---------------- | :----: | :---------: | :------: |
+| CommentsContents | String |  댓글 내용  |    O     |
 
 ###### Example
 
 ```bash
-curl -v -X POST "http://localhost:4000/api/v1/board/3" \
+curl -v -X POST "http://localhost:4000/api/v1/board/{boardNumber}/comments" \
  -h "Authorization=Bearer XXXX" \
- -d "boardContents=너무 도움됬어요 감사함욤"
+ -d "commentsContents=너무 도움됬어요 감사함욤"
 ```
 
 ##### Response
@@ -1854,7 +1967,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 댓글 번호를 포함하고 댓글 내용을 입력하여 요청하고 댓글 수정이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **PATCH**
-- end point : **/{commentNumber}**
+- end point : **/{commentsNumber}**
 
 ###### Header
 
@@ -1864,16 +1977,16 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name          |  type  | description | required |
-| ------------- | :----: | :---------: | :------: |
-| boardContents | String |  댓글 내용  |    O     |
+| name             |  type  | description | required |
+| ---------------- | :----: | :---------: | :------: |
+| CommentsContents | String |  댓글 내용  |    O     |
 
 ###### Example
 
 ```bash
-curl -v -X PATCH "http://localhost:4000/api/v1/comment/1" \
+curl -v -X PATCH "http://localhost:4000/api/v1/board/{boardNumber}/1" \
  -h "Authorization=Bearer XXXX" \
- -d "boardContent=제 친구랑 같이 이 방법으로 운동중이에요!!"
+ -d "commentsContents=제 친구랑 같이 이 방법으로 운동중이에요!!"
 ```
 
 ##### Response
@@ -1959,7 +2072,7 @@ Content-Type: application/json;charset=UTF-8
 | Authorization | Bearer 토큰 인증 헤더 |    O     |
 
 ```bash
-curl -v -X DELETE "http://localhost:4000/api/v1/comment/1" \
+curl -v -X DELETE "http://localhost:4000/api/v1/board/{boardNumber}/1" \
  -h "Authorization=Bearer XXXX"
 ```
 
@@ -2001,6 +2114,244 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "VF",
   "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+#### - 게시글 좋아요 기능
+
+#### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 게시글의 추천 기능을 사용할 수 있습니다. 추천 버튼이 실행된다면 성공에 대한 응답을 받습니다. 추천 버튼이 실행되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
+
+- method : **PUT**
+- end point : **/like**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+###### Example
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Example
+
+```bash
+curl -X PUT "http://localhost:4000/api/v1/board/{boardNumber}/like" \
+
+```
+
+###### Response Body
+
+| name    |  type  |      description      | required |
+| ------- | :----: | :-------------------: | :------: |
+| code    | String |       결과 코드       |    O     |
+| message | String | 결과 코드에 대한 설명 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+Http Status - 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+    "code": "NB",
+    "message": "No exist board."
+}
+```
+
+**응답 : 실패 (존재하지 않는 유저)**
+
+```bash
+Http Status - 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+    "code": "NU",
+    "message": "No exist user id."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+#### - 댓글 좋아요 기능
+
+#### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 댓글의 추천 기능을 사용할 수 있습니다. 추천 버튼이 실행된다면 성공에 대한 응답을 받습니다. 추천 버튼이 실행되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
+
+- method : **PUT**
+- end point : **/like**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+###### Example
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Example
+
+```bash
+curl -X PUT "http://localhost:4000/api/v1/board/{boardNumber}/{commentsNumber}/like" \
+
+```
+
+###### Response Body
+
+| name    |  type  |      description      | required |
+| ------- | :----: | :-------------------: | :------: |
+| code    | String |       결과 코드       |    O     |
+| message | String | 결과 코드에 대한 설명 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+Http Status - 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+    "code": "NB",
+    "message": "No exist board."
+}
+```
+
+**응답 : 실패 (존재하지 않는 댓글)**
+
+```bash
+Http Status - 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+    "code": "NC",
+    "message": "No exist comments."
+}
+```
+
+**응답 : 실패 (존재하지 않는 유저)**
+
+```bash
+Http Status - 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+    "code": "NU",
+    "message": "No exist user id."
 }
 ```
 
@@ -2070,8 +2421,8 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2177,8 +2528,8 @@ Content-Type: application/json;charset=UTF-8
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| mealScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| mealScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| mealScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| mealScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2274,7 +2625,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
 
 ###### Example
 
@@ -2301,8 +2652,8 @@ curl -X GET "http://localhost:4000/api/v1/health-schedule/1" \
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2369,7 +2720,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
 
 ###### Example
 
@@ -2396,8 +2747,8 @@ curl -X GET "http://localhost:4000/api/v1/meal-schedule/1" \
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2474,8 +2825,8 @@ Content-Type: application/json;charset=UTF-8
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2584,8 +2935,8 @@ Content-Type: application/json;charset=UTF-8
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2692,8 +3043,8 @@ Content-Type: application/json;charset=UTF-8
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2792,8 +3143,8 @@ Content-Type: application/json;charset=UTF-8
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
