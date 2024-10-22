@@ -32,7 +32,7 @@ public class SmsProvider {
         Message message = new Message();
         message.setFrom(from);
         message.setTo(to);
-        message.setText("Healthcare 인증 번호 [" + authNumber + "] 를 정확히 입력해주세요.");
+        message.setText("HealthCare 인증 번호 [" + authNumber + "] 를 정확히 입력해주세요.");
 
         SingleMessageSendingRequest request = new SingleMessageSendingRequest(message);
         SingleMessageSentResponse response = messageService.sendOne(request);

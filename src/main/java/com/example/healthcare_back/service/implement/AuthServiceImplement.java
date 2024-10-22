@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.healthcare_back.common.util.AuthNumberCreator;
 import com.example.healthcare_back.dto.request.auth.IdCheckRequestDto;
-import com.example.healthcare_back.dto.request.auth.NickNameCheckRequestDto;
+import com.example.healthcare_back.dto.request.auth.NicknameCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignInRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthCheckRequestDto;
@@ -152,7 +152,6 @@ public class AuthServiceImplement implements AuthService {
         }
 
         return ResponseDto.success();
-
     }
 
     @Override
@@ -170,7 +169,6 @@ public class AuthServiceImplement implements AuthService {
         }
 
         return ResponseDto.success();
-
     }
 
 }
