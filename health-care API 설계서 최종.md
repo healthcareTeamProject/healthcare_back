@@ -1,9 +1,10 @@
 <h1 style='background-color: rgba(55, 55, 55, 0.4); text-align: center'>Health_care API 설계(명세)서</h1>
+
 해당 API 명세서는 '헬스케어 ERP - health-care'의 REST API를 명세하고 있습니다.
 
 - Domain : <http://localhost:4000>
 
----
+***
 
 <h2 style='background-color: rgba(55, 55, 55, 0.2); text-align: center'>Auth 모듈</h2>
 
@@ -13,13 +14,13 @@ Auth 모듈은 인증 없이 요청할 수 있습니다.
 
 - url : /api/v1/auth
 
----
+***
 
 #### - 로그인
 
-##### - 설명
+##### 설명
 
-클라이언트는 사용자 아이디와 평민의 비밀번호를 입력하여 요청하고 아이디와 비밀번호가 일치한다면 인증에 사용될 token과 해당 token의 만료 기간을 응답 데이터로 전달받습니다. 만약 아이디 혹은 비밀번호가 하나라도 틀린다면 로그인 정보 불일치에 해당하는 응답을 받게 됩니다. 네트워크 에러, 서버 에러, 데이터베이스 에러, 토큰 생성 에러가 발생할 수 있습니다.
+클라이언트는 사용자 아이디와 평문의 비밀번호를 입력하여 요청하고 아이디와 비밀번호가 일치한다면 인증에 사용될 token과 해당 token의 만료 기간을 응답 데이터로 전달받습니다. 만약 아이디 혹은 비밀번호가 하나라도 틀린다면 로그인 정보 불일치에 해당하는 응답을 받게 됩니다. 네트워크 에러, 서버 에러, 데이터베이스 에러, 토큰 생성 에러가 발생할 수 있습니다.
 
 - method : **POST**
 - end point : **/sign-in**
@@ -37,8 +38,8 @@ Auth 모듈은 인증 없이 요청할 수 있습니다.
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/sign-in" \
- -d "userId=qwer1234" \
- -d "password=qwer1234"
+-d "userId=qwer1234" \
+-d "password=qwer1234"
 ```
 
 ##### Response
@@ -61,7 +62,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/sign-in" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -75,7 +75,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -87,7 +86,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (로그인 정보 불일치)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -99,7 +97,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (토큰 생성 실패)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -111,7 +108,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -121,6 +117,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 아이디 중복 확인
 
@@ -143,7 +141,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/id-check" \
- -d "userId=qwer1234"
+-d "userId=qwer1234"
 ```
 
 ##### Response
@@ -164,7 +162,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/id-check" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -176,7 +173,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -188,7 +184,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -200,7 +195,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -211,9 +205,11 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 닉네임 중복 확인
+
+##### 설명
 
 클라이언트는 사용할 닉네임을 입력하여 요청하고 중복되지 않는 닉네임이라면 성공 응답을 받습니다.
 만약 아이디가 중복된다면 닉네임 중복에 해당하는 응답을 받게 됩니다.
@@ -234,7 +230,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/nickname-check" \
- -d "nickname=뽀삐puppy12"
+-d "nickname=뽀삐puppy12"
 ```
 
 ##### Response
@@ -255,7 +251,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/nickname-check" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -267,7 +262,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -279,7 +273,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 닉네임)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -291,7 +284,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -302,7 +294,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 전화번호 인증
 
@@ -325,7 +317,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth" \
- -d "telNumber=01011112222"
+-d "telNumber=01011112222"
 ```
 
 ##### Response
@@ -346,7 +338,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -358,7 +349,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -370,7 +360,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 전화번호)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -382,7 +371,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (인증번호 전송 실패)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -394,7 +382,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -405,7 +392,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 인증번호 확인
 
@@ -429,8 +416,8 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth-check" \
- -d "telNumber=01011112222" \
- -d "authNumber=1234"
+-d "telNumber=01011112222" \
+-d "authNumber=1234"
 ```
 
 ##### Response
@@ -451,7 +438,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth-check" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -463,7 +449,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -475,7 +460,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (전화번호 인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -487,7 +471,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -498,7 +481,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 회원가입
 
@@ -538,23 +521,23 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/sign-up" \
- -d "profileImage=null"\
- -d "name=홍길동"\
- -d "userId=qwer1234"\
- -d "nickname=뽀삐puppy12"\
- -d "password=qwer1234"\
- -d "telNumber=01011112222"\
- -d "authNumber=1234"\
- -d "joinPath=HOME"\
- -d "height=180"\
- -d "weigh=80"\
- -d "skeletalMuscleMass=34.5"\
- -d "bodyFatMass=10.4"\
- -d "skeletalMuscleMass=34.5"\
- -d "deadlift=124"\
- -d "benchPress=74"\
- -d "squat=100"\
- -d "personalGoal=이번달은 3대 측정 500 만들꺼야"\
+-d "profileImage=null" \
+-d "name=홍길동" \
+-d "userId=qwer1234" \
+-d "nickname=뽀삐puppy12" \
+-d "password=qwer1234" \
+-d "telNumber=01011112222" \
+-d "authNumber=1234" \
+-d "joinPath=HOME" \
+-d "height=180" \
+-d "weigh=80" \
+-d "skeletalMuscleMass=34.5" \
+-d "bodyFatMass=10.4" \
+-d "skeletalMuscleMass=34.5" \
+-d "deadlift=124" \
+-d "benchPress=74" \
+-d "squat=100" \
+-d "personalGoal=이번달은 3대 측정 500 만들꺼야"
 ```
 
 ##### Response
@@ -575,7 +558,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/sign-up" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -587,7 +569,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -599,7 +580,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -611,7 +591,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 닉네임)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -623,7 +602,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 전화번호)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -636,7 +614,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (전화번호 인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -648,7 +625,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -659,7 +635,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - SNS 회원가입 및 로그인
 
@@ -689,30 +665,28 @@ curl -X POST "http://localhost:4000/api/v1/auth/sns-sign-in/{kakao}"
 ###### Example
 
 **응답 성공 (회원 O)**
-
 ```bash
 HTTP/1.1 302 Found
 Location: http://localhost:3000/sns-success?accessToken=${accessToken}&expiration=36000
 ```
 
 **응답 성공 (회원 X)**
-
 ```bash
 HTTP/1.1 302 Found
 Location: http://localhost:3000/auth?snsId=${snsId}&joinPath=${joinPath}
 ```
 
----
+***
 
 <h2 style='background-color: rgba(55, 55, 55, 0.2); text-align: center'>Customer 모듈</h2>
 
 healthcare 서비스에 사용자와 관련된 REST API 모듈입니다.
 사용자 정보확인, 정보수정, 3대측정 등록, 신체변화 등록 등의 API가 포함되어 있습니다.
-User 모듈은 모두 인증이 필요합니다.
+Customer 모듈은 모두 인증이 필요합니다.
 
 - url : /api/v1/customer
 
----
+***
 
 #### - 로그인 유저 정보 확인
 
@@ -737,6 +711,10 @@ User 모듈은 모두 인증이 필요합니다.
 curl -X GET "http://localhost:4000/api/v1/customer"
 ```
 
+##### Response
+
+###### Header
+
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
 | Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
@@ -754,7 +732,6 @@ curl -X GET "http://localhost:4000/api/v1/customer"
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -769,7 +746,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -781,7 +757,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -793,7 +768,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -803,6 +777,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 사용자 기본 정보 보기
 
@@ -824,7 +800,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234" \
+curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 ```
 
 ##### Response
@@ -850,7 +826,6 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -867,7 +842,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -879,7 +853,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -891,7 +864,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -902,7 +874,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 사용자 신체 정보 보기
 
@@ -924,7 +896,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234" \
+curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 ```
 
 ##### Response
@@ -937,21 +909,20 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234" \
 
 ###### Response Body
 
-| name                   |  type   |        description         | required |
-| ---------------------- | :-----: | :------------------------: | :------: |
-| code                   | String  |         결과 코드          |    O     |
-| message                | String  |   결과 코드에 대한 설명    |    O     |
-| user_muscle_fat_number | Integer |   사용자 신체 정보 번호    |    O     |
-| userId                 | String  |       사용자 아이디        |    O     |
-| weight                 |  Float  |           몸무게           |    O     |
-| skeletal_muscle_mass   |  Float  |          골격근량          |    X     |
-| body_fat_mass          |  Float  |          체지방량          |    X     |
-| user_muscle_fat_date   |  Date   | 사용자 신체 정보 등록 날짜 |    O     |
+| name                |  type   |        description         | required |
+| ------------------- | :-----: | :------------------------: | :------: |
+| code                | String  |         결과 코드          |    O     |
+| message             | String  |   결과 코드에 대한 설명    |    O     |
+| userMuscleFatNumber | Integer |   사용자 신체 정보 번호    |    O     |
+| userId              | String  |       사용자 아이디        |    O     |
+| weight              |  Float  |           몸무게           |    O     |
+| skeletalMuscleMass  |  Float  |          골격근량          |    X     |
+| bodyFatMass         |  Float  |          체지방량          |    X     |
+| userMuscleFatDate   | String  | 사용자 신체 정보 등록 날짜 |    O     |
 
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -959,15 +930,16 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
+  "userMuscleFatNumber": 1,
   "userId": "qwer1234",
   "weigh" : 80 ,
   "skeletalMuscleMass" : 34.5,
-  "bodyFatMass" : 10.4
+  "bodyFatMass" : 10.4,
+  "userMuscleFatDate": "2024-11-11"
 }
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -979,7 +951,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -991,7 +962,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1002,7 +972,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 사용자 3대 측정 정보
 
@@ -1037,21 +1007,20 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 
 ###### Response Body
 
-| name                              |  type   |          description           | required |
-| --------------------------------- | :-----: | :----------------------------: | :------: |
-| code                              | String  |           결과 코드            |    O     |
-| message                           | String  |     결과 코드에 대한 설명      |    O     |
-| health_machine_measurement_number | Integer |   사용자 3대 측정 정보 번호    |    O     |
-| userId                            | String  |         사용자 아이디          |    O     |
-| deadlift                          |  Float  |         데드리프트(kg)         |    X     |
-| bench_press                       |  Float  |         벤치프레스(kg)         |    X     |
-| squat                             |  Float  |             스쿼트             |    X     |
-| health_machine_measurement_date   |  Date   | 사용자 3대 측정 정보 등록 날짜 |    O     |
+| name                  |  type   |        description        | required |
+| --------------------- | :-----: | :-----------------------: | :------: |
+| code                  | String  |         결과 코드          |    O     |
+| message               | String  |   결과 코드에 대한 설명     |    O     |
+| threeMajorLiftNumber  | Integer | 사용자 3대 측정 정보 번호   |    O     |
+| userId                | String  |       사용자 아이디        |    O     |
+| deadlift              |  Float  |      데드리프트(kg)        |    X     |
+| benchPress            |  Float  |      벤치프레스(kg)        |    X     |
+| squat                 |  Float  |          스쿼트            |    X     |
+| threeMajorLiftDate    | String  | 사용자 3대 측정 등록 날짜   |    O     |
 
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1059,15 +1028,16 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
+  "threeMajorLiftsNumber": 1,
   "userId": "qwer1234",
-  "weigh" : 80 ,
-  "skeletalMuscleMass" : 34.5,
-  "bodyFatMass" : 10.4
+  "deadlift" : 120,
+  "benchPress" : 100,
+  "squat" : 110,
+  "threeMajorLiftDate" : "2024-11-11"
 }
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1079,7 +1049,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1091,7 +1060,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1102,7 +1070,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 마이페이지 정보 수정
 
@@ -1141,18 +1109,18 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1" \
- -d "profileImage=null"\
- -d "name=홍길동"\
- -d "nickname=뽀삐puppy12"\
- -d "height=180"\
- -d "weigh=80"\
- -d "skeletalMuscleMass=34.5"\
- -d "bodyFatMass=10.4"\
- -d "skeletalMuscleMass=34.5"\
- -d "deadlift=124"\
- -d "benchPress=74"\
- -d "squat=100"\
- -d "personalGoal=이번달은 3대 측정 500 만들꺼야"\
+-d "profileImage=null" \
+-d "name=홍길동" \
+-d "nickname=뽀삐puppy12" \
+-d "height=180" \
+-d "weigh=80" \
+-d "skeletalMuscleMass=34.5" \
+-d "bodyFatMass=10.4" \
+-d "skeletalMuscleMass=34.5" \
+-d "deadlift=124" \
+-d "benchPress=74" \
+-d "squat=100" \
+-d "personalGoal=이번달은 3대 측정 500 만들꺼야"
 ```
 
 ##### Response
@@ -1173,7 +1141,6 @@ curl -v -X PATCH "http://localhost:4000/api/v1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1185,7 +1152,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1197,7 +1163,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1209,7 +1174,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1221,7 +1185,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1232,13 +1195,15 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+***
+
 <h2 style='background-color: rgba(55, 55, 55, 0.2); text-align: center'>Board 모듈</h2>
 
 모든 클라이언트는 게시물 번호, 게시물 제목, 게시물 작성자 닉네임, 게시물 작성 날짜, 게시물 조회 수가 조회가 되면 성공적으로 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - url : /api/v1/board
 
----
+***
 
 #### - 게시물 리스트 보기
 
@@ -1260,8 +1225,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/board" \
-
+curl -X GET "http://localhost:4000/api/v1/board"
 ```
 
 ##### Response
@@ -1283,16 +1247,15 @@ curl -X GET "http://localhost:4000/api/v1/board" \
 **Board**  
 | name | type | description | required |
 |---|:---:|:---:|:---:|
-| board_number | String | 게시물 번호 | O |
-| board_title | String | 게시물 제목 | O |
+| boardNumber | Integer | 게시물 번호 | O |
+| boardTitle | String | 게시물 제목 | O |
 | nickname | String | 게시물 작성자 닉네임 | O |
-| board_upload_date | String | 게시물 작성날짜 | O |
-| board_view_count | Integer | 게시물 조회수 | O |
+| boardUploadDate | String | 게시물 작성날짜 | O |
+| boardViewCount | Integer | 게시물 조회수 | O |
 
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1304,7 +1267,7 @@ Content-Type: application/json;charset=UTF-8
     {
       "boardNumber": 1,
       "boardTitle": "오늘에 추천 식단은~~",
-      "nickName": "뽀보이strong1",
+      "nickname": "뽀보이strong1",
       "board_upload_date": 2024-10-17 14:36,
       "board_view_count" : 20
     },
@@ -1314,7 +1277,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1326,7 +1288,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1336,6 +1297,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 게시물 등록
 
@@ -1399,7 +1362,6 @@ curl -v -X POST "http://localhost:4000/api/v1/board" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1411,7 +1373,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1423,7 +1384,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1435,7 +1395,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1445,6 +1404,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 게시물 상세 페이지
 
@@ -1468,7 +1429,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X GET "http://localhost:4000/api/v1/board/1" \
- -h "Authorization=Bearer XXXX"
+-h "Authorization=Bearer XXXX"
 ```
 
 ##### Response
@@ -1481,19 +1442,20 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 
 ###### Response Body
 
-| name             |   type    |      description      | required |
-| ---------------- | :-------: | :-------------------: | :------: |
-| code             |  String   |       결과 코드       |    O     |
-| message          |  String   | 결과 코드에 대한 설명 |    O     |
-| bordNumber       |  Integer  |      게시물 번호      |    O     |
-| boardTitle       |  String   |      게시물 제목      |    O     |
-| nickName         |  String   |     게시물 닉네임     |    O     |
-| boardUploadDate  |   Date    | 작성 게시물 생성 날짜 |    O     |
-| boardContents    |  String   |      게시물 내용      |    O     |
-| youtubeVideoLink |  String   |  유튜브 비디오 링크   |    X     |
-| boardViewCount   |  Integer  |        조회수         |    O     |
-| boardLikeCount   |  Integer  |    게시물 추천 수     |    O     |
-| comments         | Cooment[] |      댓글 리스트      |    O     |
+| name              |   type    |      description      | required |
+| ----------------- | :-------: | :-------------------: | :------: |
+| code              |  String   |       결과 코드       |    O     |
+| message           |  String   | 결과 코드에 대한 설명 |    O     |
+| boardNumber        |  Integer  |      게시물 번호      |    O     |
+| boardTitle        |  String   |      게시물 제목      |    O     |
+| nickname          |  String   |     게시물 닉네임     |    O     |
+| boardUploadDate   |  String   | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |  String   |      게시물 내용      |    O     |
+| youtubeVideoLink  |  String   |  유튜브 비디오 링크   |    X     |
+| boardFileContents |  String   |      게시물 자료      |    X     |
+| boardViewCount    |  Integer  |        조회수         |    O     |
+| boardLikeCount    |  Integer  |    게시물 추천 수     |    O     |
+| comments          | Comment[] |      댓글 리스트      |    O     |
 
 **comment**
 | name | type | description | required |
@@ -1502,29 +1464,37 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 | userId | String | 댓글 사용자 아이디 | O |
 | commentsContents | String | 댓글 내용 | O |
 | commentsLikeCount | Integer | 댓글 추천수 |O |
-| commentsDate | Date | 댓글 작성 날짜 | O |
+| commentsDate | String | 댓글 작성 날짜 | O |
 
 ###### Example
 
 **응답 성공**
-
-````bash
+```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 {
   "code": "SU",
   "message": "Success.",
-  "bordNumber": 1,
-  "nickName": "뽀보이strong1",
+  "boardNumber": 1,
+  "nickname": "뽀보이strong1",
   "boardUploadDate": 2024-10-17 14:36,
   "boardContents": "오늘 하체랑 엉덩이가 터질것같다"
   "youtubeVideoLink": null,
+  "boardFileContents": null,
   "boardViewCount": 10,
   "boardLikeCount": 10,
-  "commentsNumber": 2
+  "comments": [
+    {
+      "commentsNumber": 1,
+      "userId": "zxcv1234",
+      "commentsContents": "하체운동 어떻게 하시나요?",
+      "commentsLikeCount": 1,
+      "commentsDate": "2024-10-18 13:03"
+    },
+    ...
+  ]
 }
-
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
@@ -1536,10 +1506,9 @@ Content-Type: application/json;charset=UTF-8
   "code": "VF",
   "message": "Validation failed."
 }
-````
+```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1551,7 +1520,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1561,6 +1529,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 게시물 수정
 
@@ -1599,14 +1569,14 @@ URL에 게시물 번호를 포함하고 게시물 번호, 게시물 제목, 게�
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/boardNumber/1" \
- -h "Authorization=Bearer XXXX" \
- -d "boardTitle=오늘은 다이어트 94일차" \
- -d "boardCategory=식단일지", \
- -d "boardTag=식단", \
- -d "youtubeVideoLink=null", \
- -d "boardFileContents=null", \
- -d "mapLat=34.5691", \
- -d "mapLng=106.9786",
+-h "Authorization=Bearer XXXX" \
+-d "boardTitle=오늘은 다이어트 94일차" \
+-d "boardCategory=식단일지", \
+-d "boardTag=식단", \
+-d "youtubeVideoLink=null", \
+-d "boardFileContents=null", \
+-d "mapLat=34.5691", \
+-d "mapLng=106.9786",
 ```
 
 ##### Response
@@ -1627,7 +1597,6 @@ curl -v -X PATCH "http://localhost:4000/api/v1/boardNumber/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1639,7 +1608,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1651,7 +1619,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1663,7 +1630,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1673,6 +1639,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 게시물 삭제
 
@@ -1697,7 +1665,7 @@ URL에 게시물 번호를 포함하고 게시물 삭제가 성공적으로 이�
 
 ```bash
 curl -v -X DELETE "http://localhost:4000/api/v1/board/1" \
- -h "Authorization=Bearer XXXX"
+-h "Authorization=Bearer XXXX"
 ```
 
 ###### Header
@@ -1716,7 +1684,6 @@ curl -v -X DELETE "http://localhost:4000/api/v1/board/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1728,7 +1695,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1740,7 +1706,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1752,7 +1717,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1762,6 +1726,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 댓글 등록
 
@@ -1790,8 +1756,8 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/board/3" \
- -h "Authorization=Bearer XXXX" \
- -d "boardContents=너무 도움됬어요 감사함욤"
+-h "Authorization=Bearer XXXX" \
+-d "boardContents=너무 도움됬어요 감사함욤"
 ```
 
 ##### Response
@@ -1812,7 +1778,6 @@ curl -v -X POST "http://localhost:4000/api/v1/board/3" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1824,7 +1789,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1836,7 +1800,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1846,6 +1809,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 댓글 수정
 
@@ -1872,8 +1837,8 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/comment/1" \
- -h "Authorization=Bearer XXXX" \
- -d "boardContent=제 친구랑 같이 이 방법으로 운동중이에요!!"
+-h "Authorization=Bearer XXXX" \
+-d "boardContent=제 친구랑 같이 이 방법으로 운동중이에요!!"
 ```
 
 ##### Response
@@ -1894,7 +1859,6 @@ curl -v -X PATCH "http://localhost:4000/api/v1/comment/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1906,7 +1870,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1918,7 +1881,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1930,7 +1892,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1940,6 +1901,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 댓글 삭제
 
@@ -1960,7 +1923,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X DELETE "http://localhost:4000/api/v1/comment/1" \
- -h "Authorization=Bearer XXXX"
+-h "Authorization=Bearer XXXX"
 ```
 
 ##### Response
@@ -1981,7 +1944,6 @@ curl -v -X DELETE "http://localhost:4000/api/v1/comment/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1993,7 +1955,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2005,7 +1966,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2017,7 +1977,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2027,6 +1986,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 <h2 style='background-color: rgba(55, 55, 55, 0.2); text-align: center'> Calendar 모듈</h2>
 
@@ -2043,7 +2004,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 
 ##### 운동 스케줄: - url : /api/v1/meal-schedule
 
----
+***
 
 #### - 운동 스케줄표 일정 등록
 
@@ -2070,8 +2031,8 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2081,8 +2042,8 @@ curl -X GET "http://localhost:4000/api/v1/health-schedule" \
 -d "health_schedule_number=1" \
 -d "health_title=가슴" \
 -d "health_memo=
-      벤치프레스 12 3set,
-      플라이 15 5set"
+    벤치프레스 12 3set,
+    플라이 15 5set"
 -d "schedule_start=2024.10.17 12:00"
 -d "schedule_end=2024.10.17 23:59"
 ```
@@ -2105,7 +2066,6 @@ curl -X GET "http://localhost:4000/api/v1/health-schedule" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2117,7 +2077,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2129,7 +2088,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2141,7 +2099,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2151,6 +2108,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 식단 스케줄표 일정 등록
 
@@ -2177,8 +2136,8 @@ Content-Type: application/json;charset=UTF-8
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| mealScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| mealScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| mealScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| mealScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2188,8 +2147,8 @@ curl -X GET "http://localhost:4000/api/v1/meal-schedule" \
 -d "health_schedule_number=1" \
 -d "health_title=아침" \
 -d "health_memo=
-      닭가슴살 109kcal,
-      사과 52kcal"
+    닭가슴살 109kcal,
+    사과 52kcal"
 -d "schedule_start=2024.10.17 12:00"
 -d "schedule_end=2024.10.17 23:59"
 ```
@@ -2212,7 +2171,6 @@ curl -X GET "http://localhost:4000/api/v1/meal-schedule" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2224,7 +2182,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2236,7 +2193,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2248,7 +2204,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2258,6 +2213,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 운동 스케줄표 상세 일정
 
@@ -2279,8 +2236,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/health-schedule/1" \
-
+curl -X GET "http://localhost:4000/api/v1/health-schedule/1"
 ```
 
 ##### Response
@@ -2301,13 +2257,12 @@ curl -X GET "http://localhost:4000/api/v1/health-schedule/1" \
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2319,7 +2274,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2331,7 +2285,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2343,7 +2296,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2354,7 +2306,9 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-#### - 식단 스케줄표 상제 일정
+***
+
+#### - 식단 스케줄표 상세 일정
 
 ##### 설명
 
@@ -2374,8 +2328,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/meal-schedule/1" \
-
+curl -X GET "http://localhost:4000/api/v1/meal-schedule/1"
 ```
 
 ##### Response
@@ -2396,13 +2349,12 @@ curl -X GET "http://localhost:4000/api/v1/meal-schedule/1" \
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2414,7 +2366,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2426,7 +2377,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2438,7 +2388,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2448,6 +2397,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 운동 스케줄표 일정 수정
 
@@ -2474,8 +2425,8 @@ Content-Type: application/json;charset=UTF-8
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2485,11 +2436,11 @@ curl -X GET "http://localhost:4000/api/v1/healthScheduleNumber/1" \
 -d "health_schedule_number=1" \
 -d "health_title=가슴, 이두" \
 -d "health_memo=
-      벤치프레스 12 3set,
-      체스트 프레스 15 5set,
-      플라이 15 5set,
-      바벨 컬 10 3set,
-      덤벨 컬 10 3set"
+    벤치프레스 12 3set,
+    체스트 프레스 15 5set,
+    플라이 15 5set,
+    바벨 컬 10 3set,
+    덤벨 컬 10 3set"
 -d "schedule_start=2024.10.17 12:00"
 -d "schedule_end=2024.10.17 23:59"
 ```
@@ -2512,7 +2463,6 @@ curl -X GET "http://localhost:4000/api/v1/healthScheduleNumber/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2524,7 +2474,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2536,7 +2485,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2548,7 +2496,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2558,6 +2505,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 식단 스케줄표 일정 수정
 
@@ -2584,8 +2533,8 @@ Content-Type: application/json;charset=UTF-8
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
@@ -2595,9 +2544,9 @@ curl -X GET "http://localhost:4000/api/v1/mealScheduleNumber/1" \
 -d "health_schedule_number=1" \
 -d "health_title=아침" \
 -d "health_memo=
-      닭가슴살 109kcal,
-      사과 52kcal,
-      현미밥 152kcal"
+    닭가슴살 109kcal,
+    사과 52kcal,
+    현미밥 152kcal"
 -d "schedule_start=2024.10.17 12:00"
 -d "schedule_end=2024.10.17 23:59"
 ```
@@ -2620,7 +2569,6 @@ curl -X GET "http://localhost:4000/api/v1/mealScheduleNumber/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2632,7 +2580,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2644,7 +2591,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2656,7 +2602,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2666,6 +2611,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 운동 스케줄표 일정 삭제
 
@@ -2692,14 +2639,14 @@ Content-Type: application/json;charset=UTF-8
 | userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |           일정 제목           |    O     |
 | healthMemo           | String  |           일정 내용           |    O     |
-| healthScheduleStart  |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| healthScheduleEnd    |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
 ```bash
 curl -X GET "http://localhost:4000/api/v1/health-schedule/1" \
-  -h "Authorization=Bearer XXXX" \
+-h "Authorization=Bearer XXXX"
 ```
 
 ##### Response
@@ -2720,7 +2667,6 @@ curl -X GET "http://localhost:4000/api/v1/health-schedule/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2732,7 +2678,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2744,7 +2689,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2756,7 +2700,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2766,6 +2709,8 @@ Content-Type: application/json;charset=UTF-8
   "message": "Database error."
 }
 ```
+
+***
 
 #### - 식단 스케줄표 일정 삭제
 
@@ -2792,14 +2737,14 @@ Content-Type: application/json;charset=UTF-8
 | userId             | String  |         사용자 아이디         |    O     |
 | mealTitle          | String  |           일정 제목           |    O     |
 | mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |  Date   |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |  Date   | 스케줄 등록을 위한 마지막날짜 |    O     |
+| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 ###### Example
 
 ```bash
 curl -X GET "http://localhost:4000/api/v1/meal-schedule/1" \
-  -h "Authorization=Bearer XXXX"
+-h "Authorization=Bearer XXXX"
 ```
 
 ##### Response
@@ -2820,7 +2765,6 @@ curl -X GET "http://localhost:4000/api/v1/meal-schedule/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2832,7 +2776,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2844,7 +2787,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2856,7 +2798,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8

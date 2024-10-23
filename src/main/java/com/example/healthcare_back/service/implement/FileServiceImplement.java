@@ -11,8 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.healthcare_back.service.FileService;
 
+import lombok.RequiredArgsConstructor;
+
 
 @Service
+@RequiredArgsConstructor
 public class FileServiceImplement implements FileService {
 
     @Value("${file.path}")

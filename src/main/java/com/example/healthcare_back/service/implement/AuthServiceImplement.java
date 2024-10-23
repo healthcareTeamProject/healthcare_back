@@ -21,9 +21,11 @@ import com.example.healthcare_back.repository.CustomerRepository;
 import com.example.healthcare_back.repository.TelAuthNumberRepository;
 import com.example.healthcare_back.service.AuthService;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class AuthServiceImplement implements AuthService {
     
