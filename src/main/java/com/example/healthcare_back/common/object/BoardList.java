@@ -17,7 +17,7 @@ public class BoardList {
     private Integer boardViewCount;
 
 
-    private BoardList (BoardEntity boardEntity) {
+    public BoardList (BoardEntity boardEntity) {
 
         this.boardNumber = boardEntity.getBoardNumber();
         this.boardTitle = boardEntity.getBoardTitle();

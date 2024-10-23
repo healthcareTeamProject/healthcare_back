@@ -9,7 +9,7 @@ public interface ResponseMessage {
     String DUPLICATED_USER_NICKNAME = "Duplicated user nickname.";  
     String DUPLICATED_USER_TEL_NUMBER = "Duplicated user tel number.";
     String NO_EXIST_USER_ID =  "No exist user id.";
-    String NO_EXIST_COMMENTS =  "No exist comments.";
+    String NO_EXIST_COMMENT =  "No exist comment.";
     String NO_EXIST_BOARD = "No exist board.";
 
     String TEL_AUTH_FAIL = "Tel number authentication failed.";

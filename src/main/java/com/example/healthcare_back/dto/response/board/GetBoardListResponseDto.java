@@ -18,7 +18,7 @@ public class GetBoardListResponseDto extends ResponseDto {
     
     private List<BoardList> boardLists;
 
-    private GetBoardListResponseDto(List<BoardEntity> boardEntities) {
+    public GetBoardListResponseDto(List<BoardEntity> boardEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         this.boardLists = BoardList.getList(boardEntities);
     }

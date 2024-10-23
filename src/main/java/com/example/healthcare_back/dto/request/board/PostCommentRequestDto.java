@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PostCommentsRequestDto {
+public class PostCommentRequestDto {
     @NotBlank
-    private String commentsContents;
+    private String commentContents;
 }

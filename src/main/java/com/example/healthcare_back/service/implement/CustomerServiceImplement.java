@@ -27,7 +27,7 @@ public class CustomerServiceImplement implements CustomerService{
         try {
 
             customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) return ResponseDto.AuthenticationFail();
+            if (customerEntity == null) return ResponseDto.authenticationFail();
 
         } catch (Exception exception) {
             exception.printStackTrace();

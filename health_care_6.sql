@@ -54,9 +54,9 @@ COMMENT = '사용자정보';
 
 
 -- -----------------------------------------------------
--- Table `health_care`.`boards`
+-- Table `health_care`.`board`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `health_care`.`boards` (
+CREATE TABLE IF NOT EXISTS `health_care`.`board` (
   `board_number` INT NOT NULL AUTO_INCREMENT COMMENT '게시물 번호',
   `board_title` VARCHAR(80) NOT NULL COMMENT '게시물 제목',
   `user_id` VARCHAR(20) NOT NULL COMMENT '게시물을 작성한 사용자 아이디',
@@ -80,21 +80,21 @@ COMMENT = '사용자 게시물';
 
 
 -- -----------------------------------------------------
--- Table `health_care`.`comments`
+-- Table `health_care`.`comment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `health_care`.`comments` (
-  `comments_number` INT NOT NULL AUTO_INCREMENT COMMENT '댓글 번호',
+CREATE TABLE IF NOT EXISTS `health_care`.`comment` (
+  `comment_number` INT NOT NULL AUTO_INCREMENT COMMENT '댓글 번호',
   `user_id` VARCHAR(20) NOT NULL COMMENT '댓글을 작성한 사용자 아이디',
   `board_number` INT NOT NULL COMMENT '댓글을 작성한 게시물 번호',
-  `comments_contents` TEXT NOT NULL COMMENT '댓글 내용',
-  `comments_date` DATE NOT NULL COMMENT '댓글  작성날짜',
-  `comments_like_count` INT NOT NULL DEFAULT 0 COMMENT '댓글 추천 수',
-  UNIQUE INDEX `comments_number_UNIQUE` (`comments_number` ASC) VISIBLE,
-  PRIMARY KEY (`comments_number`),
+  `comment_contents` TEXT NOT NULL COMMENT '댓글 내용',
+  `comment_date` DATE NOT NULL COMMENT '댓글  작성날짜',
+  `comment_like_count` INT NOT NULL DEFAULT 0 COMMENT '댓글 추천 수',
+  UNIQUE INDEX `comments_number_UNIQUE` (`comment_number` ASC) VISIBLE,
+  PRIMARY KEY (`comment_number`),
   INDEX `user_post_comments_idx` (`board_number` ASC) VISIBLE,
   CONSTRAINT `user_board_comments`
     FOREIGN KEY (`board_number`)
-    REFERENCES `health_care`.`boards` (`board_number`)
+    REFERENCES `health_care`.`board` (`board_number`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `customer_comments`
@@ -152,17 +152,17 @@ COMMENT = '사용자 운동 정보';
 
 
 -- -----------------------------------------------------
--- Table `health_care`.`health_machine_measurement`
+-- Table `health_care`.`three_major_lift`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `health_care`.`health_machine_measurement` (
-  `health_machine_measurement_number` INT NOT NULL AUTO_INCREMENT COMMENT '사용자 3대 측정 정보 번호',
+CREATE TABLE IF NOT EXISTS `health_care`.`three_major_lift` (
+  `three_major_lift_number` INT NOT NULL AUTO_INCREMENT COMMENT '사용자 3대 측정 정보 번호',
   `user_id` VARCHAR(20) NOT NULL COMMENT '아이디',
   `deadlift` FLOAT NULL COMMENT '데드리프트(kg)',
   `bench_press` FLOAT NULL COMMENT '벤치프레스(kg)',
   `squat` FLOAT NULL COMMENT '스쿼트(kg)',
-  `health_machine_measurement_date` DATE NOT NULL COMMENT '사용자 3대 측정 정보 등록 날짜',
-  PRIMARY KEY (`health_machine_measurement_number`),
-  UNIQUE INDEX `user_id_UNIQUE` (`health_machine_measurement_number` ASC) VISIBLE,
+  `three_major_lift_date` DATE NOT NULL COMMENT '사용자 3대 측정 정보 등록 날짜',
+  PRIMARY KEY (`three_major_lift_number`),
+  UNIQUE INDEX `user_id_UNIQUE` (`three_major_lift_number` ASC) VISIBLE,
   CONSTRAINT `customer_health_machine_measurement`
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`)
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`board_health_map` (
   UNIQUE INDEX `board_number_UNIQUE` (`board_number` ASC) VISIBLE,
   CONSTRAINT `user_board_board_health_map`
     FOREIGN KEY (`board_number`)
-    REFERENCES `health_care`.`boards` (`board_number`)
+    REFERENCES `health_care`.`board` (`board_number`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`board_file_contents` (
   INDEX `boards_board_file_contents_idx` (`board_number` ASC) VISIBLE,
   CONSTRAINT `boards_board_file_contents`
     FOREIGN KEY (`board_number`)
-    REFERENCES `health_care`.`boards` (`board_number`)
+    REFERENCES `health_care`.`board` (`board_number`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

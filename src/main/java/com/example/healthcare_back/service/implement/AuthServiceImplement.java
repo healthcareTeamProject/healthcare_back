@@ -14,6 +14,7 @@ import com.example.healthcare_back.dto.request.auth.TelAuthCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
+import com.example.healthcare_back.entity.CustomerEntity;
 import com.example.healthcare_back.entity.TelAuthNumberEntity;
 import com.example.healthcare_back.provider.JwtProvider;
 import com.example.healthcare_back.provider.SmsProvider;
@@ -53,7 +54,7 @@ public class AuthServiceImplement implements AuthService {
         String authNumber = AuthNumberCreator.number4();
 
         boolean isSendSuccess = smsProvider.sendMessage(telNumber, authNumber);
-        if (!isSendSuccess) return ResponseDto.AuthenticationFail();
+        if (!isSendSuccess) return ResponseDto.authenticationFail();
 
         try {
 
@@ -78,7 +79,7 @@ public class AuthServiceImplement implements AuthService {
         try {
 
             boolean isMatched = telAuthNumberRepository.existsByTelNumberAndAuthNumber(telNumber, authNumber);
-            if (!isMatched) return ResponseDto.TelAuthFail();
+            if (!isMatched) return ResponseDto.telAuthFail();
 
         } catch(Exception exception) {
             exception.printStackTrace();
@@ -98,12 +99,22 @@ public class AuthServiceImplement implements AuthService {
         String password = dto.getPassword();
 
         try {
+
+            boolean isExistedId = customerRepository.existsByUserId(userId);
+            if (isExistedId) return ResponseDto.duplicatedUserId();
+
+            boolean isExistedTelNumber = customerRepository.existsByTelNumber(telNumber);
+            if (isExistedTelNumber) return ResponseDto.duplicatedUserTelNumber();
             
             boolean isMatched = telAuthNumberRepository.existsByTelNumberAndAuthNumber(telNumber, authNumber);
-            if (!isMatched) return ResponseDto.TelAuthFail();
+            if (!isMatched) return ResponseDto.telAuthFail();
 
             String encodedPassword = passwordEncoder.encode(password);
             dto.setPassword(encodedPassword);
+
+            CustomerEntity customerEntity = new CustomerEntity(dto);
+            customerRepository.save(customerEntity);
+
             
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -123,6 +134,13 @@ public class AuthServiceImplement implements AuthService {
         String accessToken = null;
 
         try {
+
+            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+            if (customerEntity == null) return ResponseDto.signInFail();
+
+            String encodedPassword = customerEntity.getPassword();
+            boolean isMatched = passwordEncoder.matches(password, encodedPassword);
+            if (!isMatched) return ResponseDto.signInFail();
 
             accessToken = jwtProvider.create(userId);
             if (accessToken == null) return ResponseDto.tokenCreateFail();

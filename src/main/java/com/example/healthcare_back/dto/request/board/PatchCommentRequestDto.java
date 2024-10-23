@@ -8,9 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PatchCommentsRequestDto {
+public class PatchCommentRequestDto {
     
     @NotBlank
-    private String commentsContents;
+    private String commentContents;
 
 }

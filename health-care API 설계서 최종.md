@@ -1485,30 +1485,30 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 
 ###### Response Body
 
-| name              |    type    |      description      | required |
-| ----------------- | :--------: | :-------------------: | :------: |
-| code              |   String   |       결과 코드       |    O     |
-| message           |   String   | 결과 코드에 대한 설명 |    O     |
-| bordNumber        |  Integer   |      게시물 번호      |    O     |
-| boardTitle        |   String   |      게시물 제목      |    O     |
-| nickname          |   String   |     게시물 닉네임     |    O     |
-| boardUploadDate   |   String   | 작성 게시물 생성 날짜 |    O     |
-| boardContents     |   String   |      게시물 내용      |    O     |
-| youtubeVideoLink  |   String   |  유튜브 비디오 링크   |    X     |
-| boardFileContents |   String   |   게시물 첨부 자료    |    X     |
-| boardViewCount    |  Integer   |        조회수         |    O     |
-| boardLikeCount    |  Integer   |    게시물 추천 수     |    O     |
-| comments          | Comments[] |      댓글 리스트      |    O     |
-| commentsCount     |  Integer   |       댓글 개수       |    O     |
+| name              |   type    |      description      | required |
+| ----------------- | :-------: | :-------------------: | :------: |
+| code              |  String   |       결과 코드       |    O     |
+| message           |  String   | 결과 코드에 대한 설명 |    O     |
+| bordNumber        |  Integer  |      게시물 번호      |    O     |
+| boardTitle        |  String   |      게시물 제목      |    O     |
+| nickname          |  String   |     게시물 닉네임     |    O     |
+| boardUploadDate   |  String   | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |  String   |      게시물 내용      |    O     |
+| youtubeVideoLink  |  String   |  유튜브 비디오 링크   |    X     |
+| boardFileContents |  String   |   게시물 첨부 자료    |    X     |
+| boardViewCount    |  Integer  |        조회수         |    O     |
+| boardLikeCount    |  Integer  |    게시물 추천 수     |    O     |
+| comment           | Comment[] |      댓글 리스트      |    O     |
+| commentCount      |  Integer  |       댓글 개수       |    O     |
 
-**comments**
+**comment**
 | name | type | description | required |
 |---|:---:|:---:|:---:|
-| commentsNumber | Integer | 댓글 번호 | O |
+| commentNumber | Integer | 댓글 번호 | O |
 | userId | String | 댓글 사용자 아이디 | O |
-| commentsContents | String | 댓글 내용 | O |
-| commentsLikeCount | Integer | 댓글 추천수 |O |
-| commentsDate | String | 댓글 작성 날짜 | O |
+| commentContents | String | 댓글 내용 | O |
+| commentLikeCount | Integer | 댓글 추천수 |O |
+| commentDate | String | 댓글 작성 날짜 | O |
 
 ###### Example
 
@@ -1529,13 +1529,13 @@ Content-Type: application/json;charset=UTF-8
   "boardFileContents": null,
   "boardViewCount": 10,
   "boardLikeCount": 10,
-  "comments": [
+  "comment": [
     {
-      "commentsNumber": 1,
+      "commentNumber": 1,
       "userId": "zxcv1234",
-      "commentsContents": "하체운동 어떻게 하시나요?",
-      "commentsLikeCount": 1,
-      "commentsDate": "2024-10-18 13:03"
+      "commentContents": "하체운동 어떻게 하시나요?",
+      "commentLikeCount": 1,
+      "commentDate": "2024-10-18 13:03"
     }
     ...
   ]
@@ -1786,7 +1786,7 @@ Content-Type: application/json;charset=UTF-8
 모든 클라이언트는 댓글 번호, 댓글 작성자 닉네임, 댓글 내용, 댓글 작성날짜, 댓글 추천 수가 조회가 되면 성공적으로 응답을 받습니다. 네트워크 에러, 서버에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/comments-list**
+- end point : **/{boardNumber}/comment-list**
 
 ##### Request
 
@@ -1799,7 +1799,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/board/{boardNumber}/comments-list" \
+curl -X GET "http://localhost:4000/api/v1/board/{boardNumber}/comment-list" \
 
 ```
 
@@ -1813,20 +1813,20 @@ curl -X GET "http://localhost:4000/api/v1/board/{boardNumber}/comments-list" \
 
 ###### Response Body
 
-| name     |      type      |      description      | required |
-| -------- | :------------: | :-------------------: | :------: |
-| code     |     String     |       결과 코드       |    O     |
-| message  |     String     | 결과 코드에 대한 설명 |    O     |
-| comments | CommentsList[] |      댓글 리스트      |    O     |
+| name    |     type      |      description      | required |
+| ------- | :-----------: | :-------------------: | :------: |
+| code    |    String     |       결과 코드       |    O     |
+| message |    String     | 결과 코드에 대한 설명 |    O     |
+| comment | CommentList[] |      댓글 리스트      |    O     |
 
-**CommentsList**  
+**CommentList**  
 | name | type | description | required |
 |---|:---:|:---:|:---:|
-| commentsNumber | Integer | 댓글 번호 | O |
-| commentsContents | String | 댓글 내용 | O |
+| commentNumber | Integer | 댓글 번호 | O |
+| commentContents | String | 댓글 내용 | O |
 | nickname | String | 댓글 작성자 닉네임 | O |
-| commentsDate | String | 댓글 작성날짜 | O |
-| commentsLikeCount | Integer | 댓글 추천 개수 | O |
+| commentDate | String | 댓글 작성날짜 | O |
+| commentLikeCount | Integer | 댓글 추천 개수 | O |
 
 ###### Example
 
@@ -1841,11 +1841,11 @@ Content-Type: application/json;charset=UTF-8
   "message": "Success.",
   "tools": [
     {
-      "commentsNumber": 1,
-      "commentsContents": "식단 추천해주세요!",
+      "commentNumber": 1,
+      "commentContents": "식단 추천해주세요!",
       "nickname": "뽀보이strong1",
-      "commentsDate": 2024-10-17 14:36,
-      "commentsLikeCount" : 20
+      "commentDate": 2024-10-17 14:36,
+      "commentLikeCount" : 20
     },
     ...
   ]
@@ -1895,16 +1895,16 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name             |  type  | description | required |
-| ---------------- | :----: | :---------: | :------: |
-| CommentsContents | String |  댓글 내용  |    O     |
+| name            |  type  | description | required |
+| --------------- | :----: | :---------: | :------: |
+| CommentContents | String |  댓글 내용  |    O     |
 
 ###### Example
 
 ```bash
-curl -v -X POST "http://localhost:4000/api/v1/board/{boardNumber}/comments" \
+curl -v -X POST "http://localhost:4000/api/v1/board/{boardNumber}/comment" \
  -h "Authorization=Bearer XXXX" \
- -d "commentsContents=너무 도움됬어요 감사함욤"
+ -d "commentContents=너무 도움됬어요 감사함욤"
 ```
 
 ##### Response
@@ -1967,7 +1967,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 댓글 번호를 포함하고 댓글 내용을 입력하여 요청하고 댓글 수정이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **PATCH**
-- end point : **/{commentsNumber}**
+- end point : **/{commentNumber}**
 
 ###### Header
 
@@ -1977,16 +1977,16 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name             |  type  | description | required |
-| ---------------- | :----: | :---------: | :------: |
-| CommentsContents | String |  댓글 내용  |    O     |
+| name            |  type  | description | required |
+| --------------- | :----: | :---------: | :------: |
+| CommentContents | String |  댓글 내용  |    O     |
 
 ###### Example
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/board/{boardNumber}/1" \
  -h "Authorization=Bearer XXXX" \
- -d "commentsContents=제 친구랑 같이 이 방법으로 운동중이에요!!"
+ -d "commentContents=제 친구랑 같이 이 방법으로 운동중이에요!!"
 ```
 
 ##### Response
@@ -2061,7 +2061,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 댓글 번호를 포함하여 요청하고 댓글 삭제가 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **DELETE**
-- end point : **/{commentsNumber}**
+- end point : **/{commentNumber}**
 
 ##### Request
 
@@ -2282,7 +2282,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X PUT "http://localhost:4000/api/v1/board/{boardNumber}/{commentsNumber}/like" \
+curl -X PUT "http://localhost:4000/api/v1/board/{boardNumber}/{commentNumber}/like" \
 
 ```
 
@@ -2339,7 +2339,7 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "code": "NC",
-    "message": "No exist comments."
+    "message": "No exist comment."
 }
 ```
 
