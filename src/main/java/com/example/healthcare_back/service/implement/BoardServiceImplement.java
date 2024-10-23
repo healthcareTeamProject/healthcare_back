@@ -3,6 +3,7 @@ package com.example.healthcare_back.service.implement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -70,11 +71,12 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto, Integer boardNumber, String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postBoard'");
-    }
+    public ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto, String userId) {
+        
+        return null;
 
+    }
+    
     @Override
     public ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String userId) {
         // TODO Auto-generated method stub

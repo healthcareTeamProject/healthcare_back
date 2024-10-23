@@ -25,7 +25,7 @@ public class CustomerController {
     
     private final CustomerService customerService;
 
-    @GetMapping("/sign-in")
+    @GetMapping(value = {"", "/"})
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(
         @AuthenticationPrincipal String userId
     ) {

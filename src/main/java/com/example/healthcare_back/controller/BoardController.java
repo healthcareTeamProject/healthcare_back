@@ -49,7 +49,7 @@ public class BoardController {
         @RequestBody @Valid PostBoardRequestDto requestBody,
         @RequestParam String userId // 요청에서 userId를 가져오는 경우
     ) {
-        ResponseEntity<ResponseDto> response = boardService.postBoard(requestBody, null, userId);
+        ResponseEntity<ResponseDto> response = boardService.postBoard(requestBody, userId);
         return response; // 게시물을 생성합니다.
     }
 

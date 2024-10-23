@@ -18,7 +18,7 @@ public interface BoardService {
     ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber);
     ResponseEntity<? super GetBoardListResponseDto> getBoardList(Integer boardNumber);
 
-    ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto, Integer boardNumber, String userId);
+    ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto, String userId);
     ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String userId);
     ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber, String userId);
     ResponseEntity<ResponseDto> patchComment(PatchCommentRequestDto dto, Integer boardNumber, Integer commentNumber, String userId);
