@@ -22,12 +22,12 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId) {
         
-        CustomerEntity customerEntity;
+        CustomerEntity customerEntity = null;
 
         try {
 
             customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) return ResponseDto.AuthenticationFail();
+            if (customerEntity == null) return ResponseDto.authenticationFail();
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -60,7 +60,7 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId) {
        
-        CustomerEntity customerEntity;
+        CustomerEntity customerEntity = null;
 
         try {
             

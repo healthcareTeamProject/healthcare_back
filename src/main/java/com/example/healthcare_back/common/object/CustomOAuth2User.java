@@ -7,16 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 // 사용자 지정 OAuth2 유저 객체
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class CustomOAuth2User implements OAuth2User {
 
     private String name;

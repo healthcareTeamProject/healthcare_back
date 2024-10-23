@@ -3,6 +3,7 @@ package com.example.healthcare_back.dto.request.auth;
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,9 +35,9 @@ public class SignUpRequestDto {
     @Pattern(regexp="^(home|kakao|naver)$")
     private String joinPath;
     private String snsId;
-    @NotBlank
+    @NotNull
     private Float weight;
-    @NotBlank
+    @NotNull
     private Float height;
     private Float skeletalMuscleMass;
     private Float bodyFatMass;

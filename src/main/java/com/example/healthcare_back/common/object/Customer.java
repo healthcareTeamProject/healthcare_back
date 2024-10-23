@@ -2,15 +2,9 @@ package com.example.healthcare_back.common.object;
 
 import com.example.healthcare_back.entity.CustomerEntity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Customer {
 
     private String userId;
@@ -44,4 +38,5 @@ public class Customer {
         this.benchPress = customerEntity.getBenchPress();
         this.squat = customerEntity.getSquat();
     }
+
 }

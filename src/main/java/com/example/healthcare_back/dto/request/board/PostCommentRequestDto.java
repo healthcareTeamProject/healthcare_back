@@ -1,4 +1,5 @@
-package com.example.healthcare_back.dto.request.auth;
+package com.example.healthcare_back.dto.request.board;
+
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -8,11 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SignInRequestDto {
-    
+public class PostCommentRequestDto {
     @NotBlank
-    private String userId;
-    @NotBlank
-    private String password;
-
+    private String commentContents;
 }
