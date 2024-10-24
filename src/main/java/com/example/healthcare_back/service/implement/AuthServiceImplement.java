@@ -170,7 +170,6 @@ public class AuthServiceImplement implements AuthService {
         }
 
         return ResponseDto.success();
-
     }
 
     @Override
@@ -188,7 +187,6 @@ public class AuthServiceImplement implements AuthService {
         }
 
         return ResponseDto.success();
-
     }
 
 }

@@ -29,7 +29,12 @@ public interface AuthService {
     */
    ResponseEntity<ResponseDto> nicknameCheck(NicknameCheckRequestDto requestBody);
 
-  
+   /**
+    * 전화 인증 과정을 시작하고 SMS를 전송합니다.
+    *
+    * @param requestBody 인증할 전화번호를 포함하는 요청 객체
+    * @return ResponseEntity<ResponseDto> 인증 과정의 결과를 포함하는 응답 객체
+    */
    ResponseEntity<ResponseDto> telAuth(TelAuthRequestDto requestBody);
 
    /**
