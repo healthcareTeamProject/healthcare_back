@@ -12,12 +12,10 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
 
 public interface AuthService {
-    
    ResponseEntity<ResponseDto> idCheck(IdCheckRequestDto requestBody);
    ResponseEntity<ResponseDto> nicknameCheck(NicknameCheckRequestDto requestBody);
    ResponseEntity<ResponseDto> telAuth(TelAuthRequestDto requestBody);
    ResponseEntity<ResponseDto> telAuthCheck(TelAuthCheckRequestDto requestBody);
    ResponseEntity<ResponseDto> signUp(SignUpRequestDto requestBody);
    ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto requestBody);
-
 }
