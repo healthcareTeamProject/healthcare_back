@@ -14,7 +14,10 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
     
     boolean existsByBoardNumber(Integer boardNumber);
 
-    BoardEntity findByBoardNumber(Integer boardNumber);
+    static BoardEntity findByBoardNumber(Integer boardNumber) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByBoardNumber'");
+    }
 
     List<BoardEntity> findAllByBoardNumber(Integer boardNumber);
 
