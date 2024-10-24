@@ -488,7 +488,7 @@ Content-Type: application/json;charset=UTF-8
 ##### 설명
 
 클라이언트는 사용자 이름, 사용자 아이디, 사용자 닉네임, 비밀번호, 전화번호, 인증번호, 가입 경로, 프로필 이미지, 개인 목표, 키, 몸무게, 골격근량, 체지방량, 벤치프레스, 데드리프트, 스쿼트, 개인 목표를 입력하여 요청하고 회원가입이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 만약 존재하는 아이디, 닉네임일 경우 중복된 아이디, 닉네임에 대한 응답을 받고,
-만약 존재하는 전화번호일 경우 중복된 전화번호에 대한 응답을 받고, 전화번호와 인증번호가 일치하지 않으면 전화번호 인증 실패에 대한 응답을 받습니다. 네트워크에
+만약 존재하는 전화번호일 경우 중복된 전화번호에 대한 응답을 받고, 전화번호와 인증번호가 일치하지 않으면 전화번호 인증 실패에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **POST**
 - end point : **/sign-up**
@@ -533,7 +533,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/sign-up" \
 -d "weigh=80" \
 -d "skeletalMuscleMass=34.5" \
 -d "bodyFatMass=10.4" \
--d "skeletalMuscleMass=34.5" \
 -d "deadlift=124" \
 -d "benchPress=74" \
 -d "squat=100" \
@@ -682,7 +681,7 @@ Location: http://localhost:3000/auth?snsId=${snsId}&joinPath=${joinPath}
 
 healthcare 서비스에 사용자와 관련된 REST API 모듈입니다.
 사용자 정보확인, 정보수정, 3대측정 등록, 신체변화 등록 등의 API가 포함되어 있습니다.
-Customer 모듈은 모두 인증이 필요합니다.
+User 모듈은 모두 인증이 필요합니다.
 
 - url : /api/v1/customer
 
@@ -1116,7 +1115,6 @@ curl -v -X PATCH "http://localhost:4000/api/v1" \
 -d "weigh=80" \
 -d "skeletalMuscleMass=34.5" \
 -d "bodyFatMass=10.4" \
--d "skeletalMuscleMass=34.5" \
 -d "deadlift=124" \
 -d "benchPress=74" \
 -d "squat=100" \
@@ -2000,9 +1998,9 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 
 [FullCalendar API]: https://fullcalendar.io/docs/react/
 
-##### 식단 스케줄: - url : /api/v1/health-schedule
+##### 식단 스케줄: - url : /api/v1/meal-schedule
 
-##### 운동 스케줄: - url : /api/v1/meal-schedule
+##### 운동 스케줄: - url : /api/v1/health-schedule
 
 ***
 
