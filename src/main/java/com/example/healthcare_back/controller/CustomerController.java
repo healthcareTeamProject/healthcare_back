@@ -22,31 +22,47 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/v1/customer")
 @RequiredArgsConstructor
 public class CustomerController {
-    
+
     private final CustomerService customerService;
 
+    /**
+     * 로그인한 고객의 정보를 가져옵니다.
+     * 
+     * @param userId 인증된 사용자의 ID
+     * @return 고객의 로그인 정보
+     */
     @GetMapping(value = {"", "/"})
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(
         @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<? super GetSignInResponseDto> response = customerService.getSignIn(userId);
-        return response;
+        return customerService.getSignIn(userId);
     }
 
+    /**
+     * 특정 고객의 정보를 가져옵니다.
+     * 
+     * @param userId 고객의 ID
+     * @return 고객의 정보
+     */
     @GetMapping("/{userId}")
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(
         @PathVariable("userId") String userId
     ) {
-        ResponseEntity<? super GetCustomerResponseDto> response = customerService.getCustomer(userId);
-        return response;
+        return customerService.getCustomer(userId);
     }
 
-    @PatchMapping(value={"", "/ "})
-    public ResponseEntity<ResponseDto> patchCustomer (
+    /**
+     * 고객 정보를 업데이트합니다.
+     * 
+     * @param requestBody 업데이트할 고객 정보
+     * @param userId 인증된 사용자의 ID
+     * @return 업데이트 결과
+     */
+    @PatchMapping(value = {"", " "})
+    public ResponseEntity<ResponseDto> patchCustomer(
         @RequestBody @Valid PatchCustomerRequestDto requestBody,
         @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<ResponseDto> response = customerService.patchCustomer(requestBody, userId);
-        return response;
+        return customerService.patchCustomer(requestBody, userId);
     }
 }

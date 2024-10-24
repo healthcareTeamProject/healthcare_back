@@ -31,7 +31,8 @@ public class AuthController {
     public ResponseEntity<ResponseDto> idCheck(
         @RequestBody @Valid IdCheckRequestDto requestBody
     ) {
-        return authService.idCheck(requestBody);
+        ResponseEntity<ResponseDto> response = authService.idCheck(requestBody);
+        return response;
     }
 
     // 닉네임 중복 체크
@@ -39,7 +40,8 @@ public class AuthController {
     public ResponseEntity<ResponseDto> nicknameCheck(
         @RequestBody @Valid NicknameCheckRequestDto requestBody
     ) {
-        return authService.nicknameCheck(requestBody);
+        ResponseEntity<ResponseDto> response = authService.nicknameCheck(requestBody);
+        return response;
     }
 
     // 전화번호 인증 요청
@@ -47,7 +49,8 @@ public class AuthController {
     public ResponseEntity<ResponseDto> telAuth(
         @RequestBody @Valid TelAuthRequestDto requestBody
     ) {
-        return authService.telAuth(requestBody);
+        ResponseEntity<ResponseDto> response = authService.telAuth(requestBody);
+        return response;
     }
 
     // 전화번호 인증 확인
@@ -55,22 +58,27 @@ public class AuthController {
     public ResponseEntity<ResponseDto> telAuthCheck(
         @RequestBody @Valid TelAuthCheckRequestDto requestBody
     ) {
-        return authService.telAuthCheck(requestBody);
+        ResponseEntity<ResponseDto> response = authService.telAuthCheck(requestBody);
+        return response;
     }
+
 
     // 회원가입
     @PostMapping("/sign-up")
     public ResponseEntity<ResponseDto> signUp(
         @RequestBody @Valid SignUpRequestDto requestBody
     ) {
-        return authService.signUp(requestBody);
-    }
+        ResponseEntity<ResponseDto> response = authService.signUp(requestBody);
+        return response;
+
+    } 
 
     // 로그인
     @PostMapping("/sign-in")
     public ResponseEntity<? super SignInResponseDto> signIn(
         @RequestBody @Valid SignInRequestDto requestBody
     ) {
-        return authService.signIn(requestBody);
+        ResponseEntity<? super SignInResponseDto> response = authService.signIn(requestBody);
+        return response;
     }
 }

@@ -1,8 +1,6 @@
 package com.example.healthcare_back.entity;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 
@@ -11,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,24 +23,23 @@ public class BoardEntity {
     
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer boardNumber;
+    @Column(nullable = false, length = 80)
     private String boardTitle;
-    private String nickname;
-    private String boardUploadDate;
+    private String nickname; // userId로 초기화
+    private LocalDateTime boardUploadDate; 
     private String boardContents;
     private String youtubeVideoLink;
     private String boardFileContents;
     private Integer boardViewCount;
     private Integer boardLikeCount;
     private Integer commentCount;
+    
 
     public BoardEntity(PostBoardRequestDto dto, String userId) {
-        Date now = Date.from(Instant.now());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String boardUploadDate = simpleDateFormat.format(now);
         
         this.boardTitle = dto.getBoardTitle();
-        this.nickname = getNickname();
-        this.boardUploadDate = boardUploadDate;
+        this.nickname = userId;
+        this.boardUploadDate = LocalDateTime.now(); // 업로드 날짜 설정
         this.boardContents = dto.getBoardContents();
         this.youtubeVideoLink = dto.getYoutubeVideoLink();
         this.boardFileContents = dto.getBoardFileContents();
@@ -59,11 +57,11 @@ public class BoardEntity {
         this.commentCount++;
     }
 
-    public void increaseFavoriteCount() {
+    public void increaseLikeCount() {
         this.boardLikeCount++;
     }
 
-    public void decreaseFavoriteCount() {
+    public void decreaseLikeCount() {
         this.boardLikeCount--;
     }
 

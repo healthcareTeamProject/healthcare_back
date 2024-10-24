@@ -18,7 +18,7 @@ public class GetCustomerResponseDto extends ResponseDto {
     private String nickname;
     private String telNumber;
     private String profileImage;
-    private String personalGoal;
+    private String personalGoals;
     private Float weight;
     private Float height;
     private Float skeletalMuscleMass;
@@ -38,7 +38,7 @@ public class GetCustomerResponseDto extends ResponseDto {
         this.nickname = customerEntity.getNickname();
         this.telNumber = customerEntity.getTelNumber();
         this.profileImage = customerEntity.getProfileImage();
-        this.personalGoal = customerEntity.getPersonalGoal();
+        this.personalGoals = customerEntity.getPersonalGoals();
         this.weight = customerEntity.getWeight();
         this.height = customerEntity.getHeight();
         this.skeletalMuscleMass = customerEntity.getSkeletalMuscleMass();

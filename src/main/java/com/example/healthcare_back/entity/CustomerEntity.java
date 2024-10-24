@@ -25,7 +25,7 @@ public class CustomerEntity {
     private String joinPath;
     private String snsId;
     private String profileImage;
-    private String personalGoal;
+    private String personalGoals;
     private Float weight;
     private Float height;
     private Float skeletalMuscleMass;
@@ -33,9 +33,9 @@ public class CustomerEntity {
     private Float deadlift;
     private Float benchPress;
     private Float squat;
-    private Integer userMuscleFatNumber;
+    private Integer userMuscleFatNumber = 1;
     private String userMuscleFatDate;
-    private Integer threeMajorLiftsNumber;
+    private Integer threeMajorLiftsNumber = 1;
     private String threeMajorLiftsDate;
 
 
@@ -48,7 +48,7 @@ public class CustomerEntity {
         this.joinPath = dto.getJoinPath();
         this.snsId = dto.getSnsId();
         this.profileImage = dto.getProfileImage();
-        this.personalGoal = dto.getPersonalGoal();
+        this.personalGoals = dto.getPersonalGoal();
         this.height = dto.getHeight();
         this.weight = dto.getWeight();
         this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
@@ -56,9 +56,7 @@ public class CustomerEntity {
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
-        this.userMuscleFatNumber = 0; // 기본값 설정
         this.userMuscleFatDate = null; // 초기값을 null로 설정
-        this.threeMajorLiftsNumber = 0; 
         this.threeMajorLiftsDate = null; 
     }
 }

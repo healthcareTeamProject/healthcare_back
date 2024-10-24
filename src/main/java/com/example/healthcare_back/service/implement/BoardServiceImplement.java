@@ -1,9 +1,7 @@
 package com.example.healthcare_back.service.implement;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,6 @@ import com.example.healthcare_back.entity.BoardEntity;
 import com.example.healthcare_back.entity.CommentEntity;
 import com.example.healthcare_back.repository.BoardRepository;
 import com.example.healthcare_back.repository.CommentRepository;
-import com.example.healthcare_back.repository.resultSet.CommentListResultSet;
 import com.example.healthcare_back.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -64,7 +61,7 @@ public class BoardServiceImplement implements BoardService {
 
 
     @Override
-    public ResponseEntity<? super GetBoardListResponseDto> getBoardList(Integer boardNumber) {
+    public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
 
         return null;
 

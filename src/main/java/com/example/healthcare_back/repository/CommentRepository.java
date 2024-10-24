@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.healthcare_back.entity.CommentEntity;
-import com.example.healthcare_back.repository.resultSet.CommentListResultSet;
 
 @Repository
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
