@@ -127,22 +127,22 @@ public class BoardServiceImplement implements BoardService {
     @Override
     public ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber, String userId) {
         try {
-            CommentEntity commentEntity = CommentRepository.findByCommentNumber(commentNumber);
-            if(commentEntity == null) return ResponseDto.noExistComment();
+            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
+            if(boardEntity == null) return ResponseDto.noExistBoard();
             
         } catch (Exception exception) {
         exception.printStackTrace();
         return ResponseDto.databaseError();
         }
 
-        return GetCommentListResponseDto.success();
+        return GetBoardResponseDto.success();
     }
 
     @Override
     public ResponseEntity<ResponseDto> patchComment(PatchCommentRequestDto dto, Integer boardNumber, Integer commentNumber, String userId) {
         try {
-            commentEntity commentEntity = CommentRepository.findByCommentNumber(commentNumber);
-            if(commentEntity == null) return ResponseDto.noExistComment();
+            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
+            if(boardEntity == null) return ResponseDto.noExistBoard();
             
         } catch (Exception exception) {
         exception.printStackTrace();
@@ -169,8 +169,8 @@ public class BoardServiceImplement implements BoardService {
     @Override
     public ResponseEntity<ResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String userId) {
         try {
-            CommentEntity commentEntity = CommentEntity.findByCommentNumber(commentNumber);
-            if(commentEntity == null) return ResponseDto.noExistComment();
+            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
+            if(boardEntity == null) return ResponseDto.noExistBoard();
             
         } catch (Exception exception) {
         exception.printStackTrace();
