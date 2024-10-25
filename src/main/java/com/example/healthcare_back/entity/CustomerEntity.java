@@ -33,6 +33,10 @@ public class CustomerEntity {
     private Float deadlift;
     private Float benchPress;
     private Float squat;
+    private Integer userMuscleFatNumber;
+    private String userMuscleFatDate;
+    private Integer threeMajorLiftsNumber;
+    private String threeMajorLiftsDate;
 
 
     public CustomerEntity(SignUpRequestDto dto) {
@@ -52,8 +56,9 @@ public class CustomerEntity {
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
-
+        this.userMuscleFatNumber = 0; // 기본값 설정
+        this.userMuscleFatDate = null; // 초기값을 null로 설정
+        this.threeMajorLiftsNumber = 0; 
+        this.threeMajorLiftsDate = null; 
     }
-
-
 }
