@@ -15,7 +15,6 @@ import com.example.healthcare_back.dto.response.board.GetBoardResponseDto;
 import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
 import com.example.healthcare_back.entity.BoardEntity;
 import com.example.healthcare_back.entity.CommentEntity;
-import com.example.healthcare_back.entity.CustomerEntity;
 import com.example.healthcare_back.repository.BoardRepository;
 import com.example.healthcare_back.repository.CommentRepository;
 import com.example.healthcare_back.service.BoardService;
@@ -36,7 +35,7 @@ public class BoardServiceImplement implements BoardService {
     
         try {
         // 게시물 조회
-        boardEntity = boardRepository.findByBoardNumber(boardNumber);
+        boardEntity = BoardRepository.findByBoardNumber(boardNumber);
         if (boardEntity == null) {
             return GetBoardResponseDto.noExistBoard(); // 게시물이 없을 경우 처리
         }
@@ -82,7 +81,7 @@ public class BoardServiceImplement implements BoardService {
     
         try {
         // 게시물 조회
-        boardEntity = boardRepository.findByBoardNumber(boardNumber);
+        boardEntity = BoardRepository.findByBoardNumber(boardNumber);
         if (boardEntity == null) {
             return GetBoardResponseDto.noExistBoard(); // 게시물이 없을 경우 처리
         }
@@ -108,66 +107,76 @@ public class BoardServiceImplement implements BoardService {
         return ResponseDto.databaseError();
         }
 
-        return null;
+        return GetBoardResponseDto.success();
     }
 
     @Override
     public ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String userId) {
         try {
+            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
+            if(boardEntity == null) return ResponseDto.noExistBoard();
             
         } catch (Exception exception) {
         exception.printStackTrace();
         return ResponseDto.databaseError();
         }
 
-        return null;
+        return GetBoardResponseDto.success();
     }
 
     @Override
     public ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber, String userId) {
         try {
+            CommentEntity commentEntity = CommentRepository.findByCommentNumber(commentNumber);
+            if(commentEntity == null) return ResponseDto.noExistComment();
             
         } catch (Exception exception) {
         exception.printStackTrace();
         return ResponseDto.databaseError();
         }
 
-        return null;
+        return GetCommentListResponseDto.success();
     }
 
     @Override
     public ResponseEntity<ResponseDto> patchComment(PatchCommentRequestDto dto, Integer boardNumber, Integer commentNumber, String userId) {
         try {
+            commentEntity commentEntity = CommentRepository.findByCommentNumber(commentNumber);
+            if(commentEntity == null) return ResponseDto.noExistComment();
             
         } catch (Exception exception) {
         exception.printStackTrace();
         return ResponseDto.databaseError();
         }
 
-        return null;
+        return GetCommentListResponseDto.success();
     }
 
     @Override
     public ResponseEntity<ResponseDto> deleteBoard(Integer boardNumber, String userId) {
         try {
-            
+            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
+            if(boardEntity == null) return ResponseDto.noExistBoard();
+
         } catch (Exception exception) {
         exception.printStackTrace();
         return ResponseDto.databaseError();
         }
 
-        return null;
+        return GetBoardListResponseDto.success();
     }
 
     @Override
     public ResponseEntity<ResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String userId) {
         try {
+            CommentEntity commentEntity = CommentEntity.findByCommentNumber(commentNumber);
+            if(commentEntity == null) return ResponseDto.noExistComment();
             
         } catch (Exception exception) {
         exception.printStackTrace();
         return ResponseDto.databaseError();
         }
 
-        return null;
+        return GetCommentListResponseDto.success();
     }
 }
