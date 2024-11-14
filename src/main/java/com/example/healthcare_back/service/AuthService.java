@@ -12,7 +12,6 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
 
 public interface AuthService {
-    
    /**
     * 주어진 사용자 ID가 이미 사용 중인지 확인합니다.
     *
@@ -60,5 +59,4 @@ public interface AuthService {
     * @return ResponseEntity<SignInResponseDto> 로그인 작업의 결과를 포함하는 응답 객체
     */
    ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto requestBody);
-
 }

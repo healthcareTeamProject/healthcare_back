@@ -10,12 +10,7 @@ import com.example.healthcare_back.entity.BoardEntity;
 
 @Repository
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
-    
-    
     boolean existsByBoardNumber(Integer boardNumber);
-
     BoardEntity findByBoardNumber(Integer boardNumber);
-
     List<BoardEntity> findAllByBoardNumber(Integer boardNumber);
-
 }

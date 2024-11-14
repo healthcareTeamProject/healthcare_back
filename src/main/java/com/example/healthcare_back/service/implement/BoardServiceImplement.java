@@ -29,11 +29,11 @@ public class BoardServiceImplement implements BoardService {
     private final CommentRepository commentRepository;
 
     @Override
-        public ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber) {
-            BoardEntity boardEntity;
-            List<CommentEntity> commentList; // 변경된 타입으로 선언
+    public ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber) {
+        BoardEntity boardEntity;
+        List<CommentEntity> commentList; // 변경된 타입으로 선언
     
-            try {
+        try {
             // 게시물 조회
             boardEntity = boardRepository.findByBoardNumber(boardNumber);
             if (boardEntity == null) {
@@ -54,24 +54,18 @@ public class BoardServiceImplement implements BoardService {
 
     @Override
     public ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber) {
-        
         return null;
-
     }
 
 
     @Override
     public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
-
         return null;
-
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto, String userId) {
-        
+    public ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto, String userId) { 
         return null;
-
     }
     
     @Override
@@ -104,6 +98,4 @@ public class BoardServiceImplement implements BoardService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteComment'");
     }
-
-
 }

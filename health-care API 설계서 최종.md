@@ -4,7 +4,7 @@
 
 - Domain : <http://localhost:4000>
 
----
+***
 
 <h2 style='background-color: rgba(55, 55, 55, 0.2); text-align: center'>Auth 모듈</h2>
 
@@ -14,7 +14,7 @@ Auth 모듈은 인증 없이 요청할 수 있습니다.
 
 - url : /api/v1/auth
 
----
+***
 
 #### - 로그인
 
@@ -62,7 +62,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/sign-in" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -76,7 +75,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -88,7 +86,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (로그인 정보 불일치)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -100,7 +97,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (토큰 생성 실패)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -112,7 +108,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -167,7 +162,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/id-check" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -179,7 +173,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -191,7 +184,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -203,7 +195,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -214,7 +205,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 닉네임 중복 확인
 
@@ -260,7 +251,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/nickname-check" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -272,7 +262,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -284,7 +273,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 닉네임)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -296,7 +284,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -307,7 +294,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 전화번호 인증
 
@@ -351,7 +338,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -363,7 +349,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -375,7 +360,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 전화번호)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -387,7 +371,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (인증번호 전송 실패)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -399,7 +382,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -410,7 +392,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 인증번호 확인
 
@@ -456,7 +438,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth-check" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -468,7 +449,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -480,7 +460,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (전화번호 인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -492,7 +471,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -503,7 +481,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 회원가입
 
@@ -579,7 +557,6 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/sign-up" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -591,7 +568,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -603,7 +579,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -615,7 +590,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 닉네임)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -627,7 +601,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (중복된 전화번호)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -640,7 +613,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (전화번호 인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -652,7 +624,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -663,7 +634,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - SNS 회원가입 및 로그인
 
@@ -693,20 +664,18 @@ curl -X POST "http://localhost:4000/api/v1/auth/sns-sign-in/{kakao}"
 ###### Example
 
 **응답 성공 (회원 O)**
-
 ```bash
 HTTP/1.1 302 Found
 Location: http://localhost:3000/sns-success?accessToken=${accessToken}&expiration=36000
 ```
 
 **응답 성공 (회원 X)**
-
 ```bash
 HTTP/1.1 302 Found
 Location: http://localhost:3000/auth?snsId=${snsId}&joinPath=${joinPath}
 ```
 
----
+***
 
 <h2 style='background-color: rgba(55, 55, 55, 0.2); text-align: center'>Customer 모듈</h2>
 
@@ -716,7 +685,7 @@ User 모듈은 모두 인증이 필요합니다.
 
 - url : /api/v1/customer
 
----
+***
 
 #### - 로그인 유저 정보 확인
 
@@ -762,7 +731,6 @@ curl -X GET "http://localhost:4000/api/v1/customer"
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -777,7 +745,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -789,7 +756,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -801,7 +767,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -860,7 +825,6 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -877,7 +841,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -889,7 +852,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -901,7 +863,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -912,7 +873,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 사용자 신체 정보 보기
 
@@ -961,7 +922,6 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -979,7 +939,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -991,7 +950,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1003,7 +961,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1014,7 +971,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 사용자 3대 측정 정보
 
@@ -1060,10 +1017,10 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 | squat                |  Float  |          스쿼트           |    X     |
 | threeMajorLiftDate   | String  | 사용자 3대 측정 등록 날짜 |    O     |
 
+
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1081,7 +1038,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1093,7 +1049,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1105,7 +1060,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1116,7 +1070,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
----
+***
 
 #### - 마이페이지 정보 수정
 
@@ -1186,7 +1140,6 @@ curl -v -X PATCH "http://localhost:4000/api/v1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1198,7 +1151,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (존재하지 않는 아이디)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1210,7 +1162,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1222,7 +1173,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1234,7 +1184,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1253,7 +1202,7 @@ Content-Type: application/json;charset=UTF-8
 
 - url : /api/v1/board
 
----
+***
 
 #### - 게시물 리스트 보기
 
@@ -1306,7 +1255,6 @@ curl -X GET "http://localhost:4000/api/v1/board"
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1328,7 +1276,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1340,7 +1287,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1352,6 +1298,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 ---
+
 
 #### - 게시물 등록
 
@@ -1415,7 +1362,6 @@ curl -v -X POST "http://localhost:4000/api/v1/board" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1427,7 +1373,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1439,7 +1384,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1451,7 +1395,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1526,7 +1469,6 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1568,7 +1510,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1580,7 +1521,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1658,7 +1598,6 @@ curl -v -X PATCH "http://localhost:4000/api/v1/boardNumber/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1670,7 +1609,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1682,7 +1620,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1694,7 +1631,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1749,7 +1685,6 @@ curl -v -X DELETE "http://localhost:4000/api/v1/board/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1761,7 +1696,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1773,7 +1707,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1785,7 +1718,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1847,7 +1779,6 @@ curl -v -X POST "http://localhost:4000/api/v1/board/3" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1859,7 +1790,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1871,7 +1801,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -1931,7 +1860,6 @@ curl -v -X PATCH "http://localhost:4000/api/v1/comment/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -1943,7 +1871,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1955,7 +1882,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -1967,7 +1893,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2020,7 +1945,6 @@ curl -v -X DELETE "http://localhost:4000/api/v1/comment/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2032,7 +1956,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2044,7 +1967,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2056,7 +1978,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2084,7 +2005,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 
 ##### 운동 스케줄: - url : /api/v1/health-schedule
 
----
+***
 
 #### - 운동 스케줄표 일정 등록
 
@@ -2146,7 +2067,6 @@ curl -X GET "http://localhost:4000/api/v1/health-schedule" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2158,7 +2078,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2170,7 +2089,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2182,7 +2100,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2255,7 +2172,6 @@ curl -X GET "http://localhost:4000/api/v1/meal-schedule" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2267,7 +2183,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2279,7 +2194,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2291,7 +2205,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2351,7 +2264,6 @@ curl -X GET "http://localhost:4000/api/v1/health-schedule/1"
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2363,7 +2275,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2375,7 +2286,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2387,7 +2297,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2447,7 +2356,6 @@ curl -X GET "http://localhost:4000/api/v1/meal-schedule/1"
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2459,7 +2367,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2471,7 +2378,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2483,7 +2389,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2559,7 +2464,6 @@ curl -X GET "http://localhost:4000/api/v1/healthScheduleNumber/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2571,7 +2475,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2583,7 +2486,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2595,7 +2497,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2669,7 +2570,6 @@ curl -X GET "http://localhost:4000/api/v1/mealScheduleNumber/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2681,7 +2581,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2693,7 +2592,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2705,7 +2603,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2771,7 +2668,6 @@ curl -X GET "http://localhost:4000/api/v1/health-schedule/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2783,7 +2679,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2795,7 +2690,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2807,7 +2701,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8
@@ -2873,7 +2766,6 @@ curl -X GET "http://localhost:4000/api/v1/meal-schedule/1" \
 ###### Example
 
 **응답 성공**
-
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2885,7 +2777,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
-
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -2897,7 +2788,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 : 실패 (인증 실패)**
-
 ```bash
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
@@ -2909,7 +2799,6 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터베이스 에러)**
-
 ```bash
 HTTP/1.1 500 Internal Server Error
 Content-Type: application/json;charset=UTF-8

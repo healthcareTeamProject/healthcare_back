@@ -31,8 +31,7 @@ public class AuthController {
     public ResponseEntity<ResponseDto> idCheck(
         @RequestBody @Valid IdCheckRequestDto requestBody
     ) {
-        ResponseEntity<ResponseDto> response = authService.idCheck(requestBody);
-        return response;
+        return authService.idCheck(requestBody);
     }
 
     // 닉네임 중복 체크
@@ -40,8 +39,7 @@ public class AuthController {
     public ResponseEntity<ResponseDto> nicknameCheck(
         @RequestBody @Valid NicknameCheckRequestDto requestBody
     ) {
-        ResponseEntity<ResponseDto> response = authService.nicknameCheck(requestBody);
-        return response;
+        return authService.nicknameCheck(requestBody);
     }
 
     // 전화번호 인증 요청
@@ -49,8 +47,7 @@ public class AuthController {
     public ResponseEntity<ResponseDto> telAuth(
         @RequestBody @Valid TelAuthRequestDto requestBody
     ) {
-        ResponseEntity<ResponseDto> response = authService.telAuth(requestBody);
-        return response;
+        return authService.telAuth(requestBody);
     }
 
     // 전화번호 인증 확인
@@ -58,10 +55,8 @@ public class AuthController {
     public ResponseEntity<ResponseDto> telAuthCheck(
         @RequestBody @Valid TelAuthCheckRequestDto requestBody
     ) {
-        ResponseEntity<ResponseDto> response = authService.telAuthCheck(requestBody);
-        return response;
+        return authService.telAuthCheck(requestBody);
     }
-
 
     // 회원가입
     @PostMapping("/sign-up")
@@ -70,7 +65,6 @@ public class AuthController {
     ) {
         ResponseEntity<ResponseDto> response = authService.signUp(requestBody);
         return response;
-
     } 
 
     // 로그인
@@ -78,7 +72,6 @@ public class AuthController {
     public ResponseEntity<? super SignInResponseDto> signIn(
         @RequestBody @Valid SignInRequestDto requestBody
     ) {
-        ResponseEntity<? super SignInResponseDto> response = authService.signIn(requestBody);
-        return response;
+        return authService.signIn(requestBody);
     }
 }

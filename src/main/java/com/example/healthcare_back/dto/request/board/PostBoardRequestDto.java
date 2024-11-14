@@ -24,5 +24,4 @@ public class PostBoardRequestDto {
     private String boardFileContents;
     private String mapLat;
     private String mapLng;
-
 }

@@ -33,10 +33,8 @@ public class BoardEntity {
     private Integer boardViewCount;
     private Integer boardLikeCount;
     private Integer commentCount;
-    
 
     public BoardEntity(PostBoardRequestDto dto, String userId) {
-        
         this.boardTitle = dto.getBoardTitle();
         this.nickname = userId;
         this.boardUploadDate = LocalDateTime.now(); // 업로드 날짜 설정
@@ -64,8 +62,4 @@ public class BoardEntity {
     public void decreaseLikeCount() {
         this.boardLikeCount--;
     }
-
-    
-
-
 }
