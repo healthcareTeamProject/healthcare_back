@@ -118,7 +118,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 아이디 중복 확인
 
@@ -777,7 +777,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 사용자 기본 정보 보기
 
@@ -1006,16 +1006,17 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 
 ###### Response Body
 
-| name                  |  type   |        description        | required |
-| --------------------- | :-----: | :-----------------------: | :------: |
-| code                  | String  |         결과 코드          |    O     |
-| message               | String  |   결과 코드에 대한 설명     |    O     |
-| threeMajorLiftNumber  | Integer | 사용자 3대 측정 정보 번호   |    O     |
-| userId                | String  |       사용자 아이디        |    O     |
-| deadlift              |  Float  |      데드리프트(kg)        |    X     |
-| benchPress            |  Float  |      벤치프레스(kg)        |    X     |
-| squat                 |  Float  |          스쿼트            |    X     |
-| threeMajorLiftDate    | String  | 사용자 3대 측정 등록 날짜   |    O     |
+| name                 |  type   |        description        | required |
+| -------------------- | :-----: | :-----------------------: | :------: |
+| code                 | String  |         결과 코드         |    O     |
+| message              | String  |   결과 코드에 대한 설명   |    O     |
+| threeMajorLiftNumber | Integer | 사용자 3대 측정 정보 번호 |    O     |
+| userId               | String  |       사용자 아이디       |    O     |
+| deadlift             |  Float  |      데드리프트(kg)       |    X     |
+| benchPress           |  Float  |      벤치프레스(kg)       |    X     |
+| squat                |  Float  |          스쿼트           |    X     |
+| threeMajorLiftDate   | String  | 사용자 3대 측정 등록 날짜 |    O     |
+
 
 ###### Example
 
@@ -1193,7 +1194,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 <h2 style='background-color: rgba(55, 55, 55, 0.2); text-align: center'>Board 모듈</h2>
 
@@ -1296,7 +1297,8 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
+
 
 #### - 게시물 등록
 
@@ -1403,7 +1405,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 게시물 상세 페이지
 
@@ -1444,7 +1446,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 | ----------------- | :-------: | :-------------------: | :------: |
 | code              |  String   |       결과 코드       |    O     |
 | message           |  String   | 결과 코드에 대한 설명 |    O     |
-| boardNumber        |  Integer  |      게시물 번호      |    O     |
+| boardNumber       |  Integer  |      게시물 번호      |    O     |
 | boardTitle        |  String   |      게시물 제목      |    O     |
 | nickname          |  String   |     게시물 닉네임     |    O     |
 | boardUploadDate   |  String   | 작성 게시물 생성 날짜 |    O     |
@@ -1496,6 +1498,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 **응답 실패 (데이터 유효성 검사 실패)**
+
 ```bash
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
@@ -1528,7 +1531,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 게시물 수정
 
@@ -1638,7 +1641,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 게시물 삭제
 
@@ -1725,7 +1728,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 댓글 등록
 
@@ -1808,7 +1811,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 댓글 수정
 
@@ -1900,7 +1903,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 댓글 삭제
 
@@ -1985,7 +1988,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 <h2 style='background-color: rgba(55, 55, 55, 0.2); text-align: center'> Calendar 모듈</h2>
 
@@ -2107,7 +2110,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 식단 스케줄표 일정 등록
 
@@ -2212,7 +2215,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 운동 스케줄표 상세 일정
 
@@ -2304,7 +2307,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 식단 스케줄표 상세 일정
 
@@ -2396,7 +2399,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 운동 스케줄표 일정 수정
 
@@ -2504,7 +2507,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 식단 스케줄표 일정 수정
 
@@ -2610,7 +2613,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 운동 스케줄표 일정 삭제
 
@@ -2708,7 +2711,7 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-***
+---
 
 #### - 식단 스케줄표 일정 삭제
 

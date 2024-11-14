@@ -34,18 +34,18 @@ public class BoardServiceImplement implements BoardService {
         List<CommentEntity> commentList; // 변경된 타입으로 선언
     
         try {
-        // 게시물 조회
-        boardEntity = BoardRepository.findByBoardNumber(boardNumber);
-        if (boardEntity == null) {
-            return GetBoardResponseDto.noExistBoard(); // 게시물이 없을 경우 처리
-        }
+            // 게시물 조회
+            boardEntity = boardRepository.findByBoardNumber(boardNumber);
+            if (boardEntity == null) {
+                return GetBoardResponseDto.noExistBoard(); // 게시물이 없을 경우 처리
+            }
         
-        // 게시물에 대한 댓글 조회
-        commentList = commentRepository.findByBoardNumber(boardNumber); // 수정된 메서드 호출
+            // 게시물에 대한 댓글 조회
+            commentList = commentRepository.findByBoardNumber(boardNumber); // 수정된 메서드 호출
     
         } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError(); // 데이터베이스 오류 처리
+            exception.printStackTrace();
+            return ResponseDto.databaseError(); // 데이터베이스 오류 처리
         }
 
         // 성공적인 응답
@@ -54,129 +54,48 @@ public class BoardServiceImplement implements BoardService {
 
     @Override
     public ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber) {
-        CommentEntity commentEntity;
-
-        try {
-        // 댓글 조회
-        commentEntity = commentRepository.findByCommentNumber(boardNumber);
-        if (commentEntity == null) {
-            return GetCommentListResponseDto.noExistComment(); // 댓글이 없는 경우 처리
-        }
-
-        } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError(); // 데이터베이스 오류 처리
-        }
-
-        // 성공적인 응답
-        return GetCommentListResponseDto.success();
-
+        return null;
     }
 
 
     @Override
-    public ResponseEntity<? super GetBoardListResponseDto> getBoardList(Integer boardNumber) {
-        BoardEntity boardEntity;
-        List<BoardEntity> boardList; // 변경된 타입으로 선언
-    
-        try {
-        // 게시물 조회
-        boardEntity = BoardRepository.findByBoardNumber(boardNumber);
-        if (boardEntity == null) {
-            return GetBoardResponseDto.noExistBoard(); // 게시물이 없을 경우 처리
-        }
-    
-        } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError(); // 데이터베이스 오류 처리
-        }
-
-        // 성공적인 응답
-        return GetBoardResponseDto.success();
+    public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
+        return null;
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto, Integer boardNumber, String userId) {
-        
-        try {
-            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
-            if(boardEntity == null) return ResponseDto.noExistBoard();
-            
-        } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-        }
-
-        return GetBoardResponseDto.success();
+    public ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto, String userId) { 
+        return null;
     }
-
+    
     @Override
     public ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String userId) {
-        try {
-            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
-            if(boardEntity == null) return ResponseDto.noExistBoard();
-            
-        } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-        }
-
-        return GetBoardResponseDto.success();
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'patchBoard'");
     }
 
     @Override
     public ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber, String userId) {
-        try {
-            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
-            if(boardEntity == null) return ResponseDto.noExistBoard();
-            
-        } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-        }
-
-        return GetBoardResponseDto.success();
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'postBoard'");
     }
 
     @Override
-    public ResponseEntity<ResponseDto> patchComment(PatchCommentRequestDto dto, Integer boardNumber, Integer commentNumber, String userId) {
-        try {
-            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
-            if(boardEntity == null) return ResponseDto.noExistBoard();
-            
-        } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-        }
-
-        return GetCommentListResponseDto.success();
+    public ResponseEntity<ResponseDto> patchComment(PatchCommentRequestDto dto, Integer boardNumber,
+            Integer commentNumber, String userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'patchComment'");
     }
 
     @Override
     public ResponseEntity<ResponseDto> deleteBoard(Integer boardNumber, String userId) {
-        try {
-            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
-            if(boardEntity == null) return ResponseDto.noExistBoard();
-
-        } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-        }
-
-        return GetBoardListResponseDto.success();
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteBoard'");
     }
 
     @Override
     public ResponseEntity<ResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String userId) {
-        try {
-            BoardEntity boardEntity = BoardRepository.findByBoardNumber(boardNumber);
-            if(boardEntity == null) return ResponseDto.noExistBoard();
-            
-        } catch (Exception exception) {
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-        }
-
-        return GetCommentListResponseDto.success();
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteComment'");
     }
 }

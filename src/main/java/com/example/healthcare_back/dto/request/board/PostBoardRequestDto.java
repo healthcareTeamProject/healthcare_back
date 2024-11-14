@@ -13,6 +13,8 @@ public class PostBoardRequestDto {
     @NotBlank
     private String boardTitle;
     @NotBlank
+    private String userId;
+    @NotBlank
     private String boardCategory;
     @NotBlank
     private String boardTag;
@@ -22,5 +24,4 @@ public class PostBoardRequestDto {
     private String boardFileContents;
     private String mapLat;
     private String mapLng;
-
 }

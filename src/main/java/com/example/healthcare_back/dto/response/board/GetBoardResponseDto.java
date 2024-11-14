@@ -1,5 +1,6 @@
 package com.example.healthcare_back.dto.response.board;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class GetBoardResponseDto extends ResponseDto {
     private Integer boardNumber;
     private String boardTitle;
     private String nickname;
-    private String boardUploadDate;
+    private LocalDateTime boardUploadDate;
     private String boardContents;
     private String youtubeVideoLink;
     private String boardFileContents;
@@ -41,7 +42,7 @@ public class GetBoardResponseDto extends ResponseDto {
         this.boardNumber = boardEntity.getBoardNumber();
         this.boardTitle = boardEntity.getBoardTitle();
         this.nickname = boardEntity.getNickname();
-        this.boardUploadDate = boardEntity.getBoardUploadDate();
+        this.boardUploadDate = LocalDateTime.now();
         this.boardContents = boardEntity.getBoardContents();
         this.youtubeVideoLink = boardEntity.getYoutubeVideoLink();
         this.boardFileContents = boardEntity.getBoardFileContents();

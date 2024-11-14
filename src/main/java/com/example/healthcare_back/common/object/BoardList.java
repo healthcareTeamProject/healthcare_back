@@ -1,5 +1,6 @@
 package com.example.healthcare_back.common.object;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class BoardList {
     private Integer boardNumber;
     private String boardTitle;
     private String nickname;
-    private String boardUploadDate;
+    private LocalDateTime boardUploadDate;
     private Integer boardViewCount;
 
 
@@ -22,7 +23,7 @@ public class BoardList {
         this.boardNumber = boardEntity.getBoardNumber();
         this.boardTitle = boardEntity.getBoardTitle();
         this.nickname = boardEntity.getNickname();
-        this.boardUploadDate = boardEntity.getBoardUploadDate();
+        this.boardUploadDate = LocalDateTime.now();
         this.boardViewCount = boardEntity.getBoardViewCount();
 
     }
